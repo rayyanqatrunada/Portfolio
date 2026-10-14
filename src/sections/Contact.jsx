@@ -55,7 +55,7 @@ export default function Contact() {
             {/* Email Channel */}
             <div className="flex flex-col bg-white border border-neutral-200 p-6 rounded-xs transition-colors hover:border-neutral-400">
               <div className="w-10 h-10 rounded-xs bg-neutral-100 border border-neutral-200 flex items-center justify-center text-neutral-900 mb-4">
-                <Mail className="w-5 h-5 stroke-[1.75]" />
+                <Mail className="w-5 h-5 stroke-[1.75]" aria-hidden="true" />
               </div>
               <h3 className="text-xs font-bold uppercase tracking-wider text-neutral-500 mb-1">
                 Direct Email
@@ -95,7 +95,7 @@ export default function Contact() {
                   className="inline-flex items-center gap-1.5 text-sm font-bold text-neutral-900 hover:text-neutral-600 underline-offset-4 hover:underline break-all"
                 >
                   View Profile
-                  <ExternalLink className="w-3.5 h-3.5 shrink-0" />
+                  <ExternalLink className="w-3.5 h-3.5 shrink-0" aria-hidden="true" />
                 </a>
               ) : (
                 <div className="flex flex-col gap-1">
@@ -125,7 +125,7 @@ export default function Contact() {
                   className="inline-flex items-center gap-1.5 text-sm font-bold text-neutral-900 hover:text-neutral-600 underline-offset-4 hover:underline break-all"
                 >
                   Connect Profile
-                  <ExternalLink className="w-3.5 h-3.5 shrink-0" />
+                  <ExternalLink className="w-3.5 h-3.5 shrink-0" aria-hidden="true" />
                 </a>
               ) : (
                 <div className="flex flex-col gap-1">

@@ -68,7 +68,7 @@ export default function ProjectCard({ project }) {
                 className="inline-flex items-center gap-1.5 font-bold uppercase tracking-wider text-neutral-900 hover:text-neutral-600 focus-visible:outline-2 focus-visible:outline-neutral-900"
               >
                 Live Demo
-                <ExternalLink className="w-3.5 h-3.5" />
+                <ExternalLink className="w-3.5 h-3.5" aria-hidden="true" />
               </a>
             )}
 
@@ -80,13 +80,13 @@ export default function ProjectCard({ project }) {
                 className="inline-flex items-center gap-1.5 font-bold uppercase tracking-wider text-neutral-900 hover:text-neutral-600 focus-visible:outline-2 focus-visible:outline-neutral-900"
               >
                 Source Code
-                <GithubIcon className="w-3.5 h-3.5" />
+                <GithubIcon className="w-3.5 h-3.5" aria-hidden="true" />
               </a>
             )}
 
             {!hasLiveUrl && !hasRepoUrl && (
               <span className="inline-flex items-center gap-1.5 font-semibold uppercase tracking-wider text-neutral-500">
-                <Lock className="w-3.5 h-3.5 text-neutral-400" />
+                <Lock className="w-3.5 h-3.5 text-neutral-400" aria-hidden="true" />
                 {project.status || 'Internal Project'}
               </span>
             )}

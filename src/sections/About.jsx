@@ -29,7 +29,7 @@ export default function About() {
               {/* Main neutral surface card */}
               <div className="relative z-10 w-full h-full bg-[#D6D6D6] border border-neutral-300 flex flex-col items-center justify-center p-6 text-center select-none shadow-xs rounded-xs">
                 <div className="w-16 h-16 rounded-full bg-white/70 flex items-center justify-center text-neutral-800 shadow-2xs mb-4">
-                  <Code2 className="w-8 h-8 stroke-[1.75]" />
+                  <Code2 className="w-8 h-8 stroke-[1.75]" aria-hidden="true" />
                 </div>
                 <p className="text-xs font-bold tracking-widest uppercase text-neutral-800">
                   Engineering Mindset
@@ -60,7 +60,7 @@ export default function About() {
                   key={index}
                   className="flex items-center gap-3 p-3 bg-neutral-50 border border-neutral-200/80 rounded-xs"
                 >
-                  <CheckSquare className="w-5 h-5 text-neutral-900 shrink-0" />
+                  <CheckSquare className="w-5 h-5 text-neutral-900 shrink-0" aria-hidden="true" />
                   <span className="text-xs sm:text-sm font-semibold tracking-wide text-neutral-800 uppercase">
                     {item}
                   </span>

@@ -64,7 +64,7 @@ export default function Hero() {
               {/* Main neutral surface image/placeholder */}
               <div className="relative z-10 w-full h-full bg-[#D6D6D6] border border-neutral-300 flex flex-col items-center justify-center p-6 text-center select-none shadow-xs rounded-xs">
                 <div className="w-16 h-16 rounded-full bg-white/70 flex items-center justify-center text-neutral-800 shadow-2xs mb-4">
-                  <Terminal className="w-8 h-8" />
+                  <Terminal className="w-8 h-8" aria-hidden="true" />
                 </div>
                 <p className="text-xs font-bold tracking-widest uppercase text-neutral-800">
                   {profileData.name}

@@ -63,7 +63,11 @@ export default function Navbar() {
           aria-controls="mobile-navigation"
           aria-label={isOpen ? 'Close menu' : 'Open menu'}
         >
-          {isOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+          {isOpen ? (
+            <X className="w-5 h-5" aria-hidden="true" />
+          ) : (
+            <Menu className="w-5 h-5" aria-hidden="true" />
+          )}
         </button>
       </Container>
 

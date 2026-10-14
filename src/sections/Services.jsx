@@ -41,7 +41,7 @@ export default function Services() {
                 {/* Visual placeholder surface matching reference image */}
                 <div className="w-full aspect-[4/3] bg-[#D6D6D6] rounded-xs flex items-center justify-center text-neutral-800 mb-5">
                   <div className="w-12 h-12 rounded-full bg-white/80 flex items-center justify-center shadow-2xs">
-                    <IconComponent className="w-6 h-6 stroke-[1.75]" />
+                    <IconComponent className="w-6 h-6 stroke-[1.75]" aria-hidden="true" />
                   </div>
                 </div>
 

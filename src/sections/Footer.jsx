@@ -73,12 +73,12 @@ export default function Footer() {
                   href={`mailto:${profileData.email}`}
                   className="flex items-center gap-2 hover:text-neutral-950 transition-colors"
                 >
-                  <Mail className="w-4 h-4 text-neutral-800 shrink-0" />
+                  <Mail className="w-4 h-4 text-neutral-800 shrink-0" aria-hidden="true" />
                   <span className="truncate">{profileData.email}</span>
                 </a>
               ) : (
                 <div className="flex items-center gap-2 text-neutral-500">
-                  <Mail className="w-4 h-4 text-neutral-400 shrink-0" />
+                  <Mail className="w-4 h-4 text-neutral-400 shrink-0" aria-hidden="true" />
                   <span className="truncate italic">Email: to be configured</span>
                 </div>
               )}
@@ -92,7 +92,7 @@ export default function Footer() {
                 >
                   <GithubIcon className="w-4 h-4 text-neutral-800 shrink-0" />
                   <span>GitHub Profile</span>
-                  <ExternalLink className="w-3 h-3 text-neutral-400" />
+                  <ExternalLink className="w-3 h-3 text-neutral-400" aria-hidden="true" />
                 </a>
               ) : (
                 <div className="flex items-center gap-2 text-neutral-500">
@@ -110,7 +110,7 @@ export default function Footer() {
                 >
                   <LinkedinIcon className="w-4 h-4 text-neutral-800 shrink-0" />
                   <span>LinkedIn Profile</span>
-                  <ExternalLink className="w-3 h-3 text-neutral-400" />
+                  <ExternalLink className="w-3 h-3 text-neutral-400" aria-hidden="true" />
                 </a>
               ) : (
                 <div className="flex items-center gap-2 text-neutral-500">
