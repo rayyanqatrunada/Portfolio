@@ -20,11 +20,42 @@ export const profileData = {
     'Relational database design.',
     'Clean, maintainable code.',
   ],
-  // Contact & Social placeholders (clear placeholders as instructed)
+
+  // CTA Section content matching visual reference
+  ctaHeading: 'HAVE A PROJECT IN MIND? LET’S BUILD SOMETHING GREAT TOGETHER.',
+  ctaDescription:
+    'Available for backend systems architecture, RESTful API development, and database engineering collaborations.',
+
+  // Contact section headings
+  contactHeading: 'LET’S WORK TOGETHER',
+  contactSubheading: 'Get In Touch',
+  contactDescription:
+    'Feel free to connect for technical discussions, backend development inquiries, or potential project collaborations.',
+
+  // Contact & Social channels (configured with clear placeholders until replaced with real data)
   email: 'your-email@example.com',
   githubUrl: 'https://github.com/your-username',
   linkedinUrl: 'https://linkedin.com/in/your-username',
 }
+
+/**
+ * Validation helpers to strictly prevent rendering fake/placeholder links as active targets.
+ */
+export const isRealEmail = (email) =>
+  Boolean(
+    email &&
+      !email.includes('example.com') &&
+      !email.includes('your-email') &&
+      email.includes('@')
+  )
+
+export const isRealUrl = (url) =>
+  Boolean(
+    url &&
+      !url.includes('your-username') &&
+      !url.includes('example.com') &&
+      url.startsWith('http')
+  )
 
 export const navLinks = [
   { id: 'home', label: 'HOME', href: '#home' },
