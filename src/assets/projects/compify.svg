@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="800" height="500" fill="none">
+  <!-- Background -->
+  <rect width="800" height="500" fill="#EAEAEA"/>
+  
+  <!-- Browser Frame -->
+  <rect x="50" y="40" width="700" height="420" rx="4" fill="#FFFFFF" stroke="#D1D1D1" stroke-width="2"/>
+  <rect x="50" y="40" width="700" height="36" fill="#F4F4F4" stroke="#D1D1D1" stroke-width="1"/>
+  
+  <!-- Browser Window Dots -->
+  <circle cx="75" cy="58" r="5" fill="#C4C4C4"/>
+  <circle cx="95" cy="58" r="5" fill="#C4C4C4"/>
+  <circle cx="115" cy="58" r="5" fill="#C4C4C4"/>
+  
+  <!-- Address bar -->
+  <rect x="145" y="48" width="510" height="20" rx="3" fill="#FFFFFF" stroke="#E0E0E0"/>
+  <text x="160" y="62" font-family="monospace" font-size="11" fill="#777777">compify-store.local/admin/inventory</text>
+  
+  <!-- App Header -->
+  <rect x="80" y="96" width="120" height="18" fill="#171717"/>
+  <text x="90" y="110" font-family="sans-serif" font-weight="700" font-size="11" fill="#FFFFFF" letter-spacing="1">COMPIFY CORE</text>
+  <rect x="560" y="96" width="150" height="18" fill="#F0F0F0" stroke="#E0E0E0"/>
+  <text x="575" y="109" font-family="sans-serif" font-size="10" fill="#666666">Role: Superadmin</text>
+
+  <!-- Sidebar -->
+  <rect x="80" y="130" width="150" height="300" fill="#FAFAFA" stroke="#E5E5E5"/>
+  <rect x="95" y="150" width="120" height="22" fill="#EAEAEA"/>
+  <text x="105" y="165" font-family="sans-serif" font-weight="600" font-size="11" fill="#171717">Catalog & Stock</text>
+  <text x="105" y="195" font-family="sans-serif" font-size="11" fill="#666666">Brands & Categories</text>
+  <text x="105" y="225" font-family="sans-serif" font-size="11" fill="#666666">Order Dispatch</text>
+  <text x="105" y="255" font-family="sans-serif" font-size="11" fill="#666666">User Roles</text>
+  
+  <!-- Main Data Table -->
+  <rect x="250" y="130" width="460" height="300" fill="#FFFFFF" stroke="#E5E5E5"/>
+  
+  <!-- Table Header -->
+  <rect x="250" y="130" width="460" height="32" fill="#F5F5F5" stroke="#E5E5E5"/>
+  <text x="270" y="151" font-family="sans-serif" font-weight="700" font-size="11" fill="#333333">SKU / ITEM</text>
+  <text x="440" y="151" font-family="sans-serif" font-weight="700" font-size="11" fill="#333333">CATEGORY</text>
+  <text x="560" y="151" font-family="sans-serif" font-weight="700" font-size="11" fill="#333333">STOCK</text>
+  <text x="640" y="151" font-family="sans-serif" font-weight="700" font-size="11" fill="#333333">STATUS</text>
+
+  <!-- Table Rows -->
+  <line x1="250" y1="195" x2="710" y2="195" stroke="#F0F0F0"/>
+  <text x="270" y="185" font-family="monospace" font-size="11" fill="#171717">CMP-RTX4070-12G</text>
+  <text x="440" y="185" font-family="sans-serif" font-size="11" fill="#666666">GPU / Nvidia</text>
+  <text x="560" y="185" font-family="monospace" font-size="11" fill="#171717">24 Units</text>
+  <rect x="640" y="172" width="55" height="18" rx="2" fill="#EAEAEA"/>
+  <text x="648" y="185" font-family="sans-serif" font-weight="600" font-size="9" fill="#171717">ACTIVE</text>
+
+  <line x1="250" y1="235" x2="710" y2="235" stroke="#F0F0F0"/>
+  <text x="270" y="225" font-family="monospace" font-size="11" fill="#171717">CMP-DDR5-32GB-K2</text>
+  <text x="440" y="225" font-family="sans-serif" font-size="11" fill="#666666">RAM / Corsair</text>
+  <text x="560" y="225" font-family="monospace" font-size="11" fill="#171717">85 Units</text>
+  <rect x="640" y="212" width="55" height="18" rx="2" fill="#EAEAEA"/>
+  <text x="648" y="225" font-family="sans-serif" font-weight="600" font-size="9" fill="#171717">ACTIVE</text>
+
+  <line x1="250" y1="275" x2="710" y2="275" stroke="#F0F0F0"/>
+  <text x="270" y="265" font-family="monospace" font-size="11" fill="#171717">CMP-NVME-2TB-G4</text>
+  <text x="440" y="265" font-family="sans-serif" font-size="11" fill="#666666">Storage / PCIe</text>
+  <text x="560" y="265" font-family="monospace" font-size="11" fill="#171717">12 Units</text>
+  <rect x="640" y="252" width="55" height="18" rx="2" fill="#EAEAEA"/>
+  <text x="648" y="265" font-family="sans-serif" font-weight="600" font-size="9" fill="#171717">ACTIVE</text>
+
+  <!-- Relational Schema Callout -->
+  <rect x="270" y="315" width="420" height="90" fill="#F8F8F8" stroke="#DCDCDC" rx="2"/>
+  <text x="285" y="338" font-family="sans-serif" font-weight="700" font-size="10" fill="#171717" letter-spacing="1">SCHEMA &amp; ORM INTEGRITY</text>
+  <text x="285" y="358" font-family="monospace" font-size="10" fill="#555555">products [1:N] stocks | categories [1:N] products | brands [1:N] products</text>
+  <text x="285" y="378" font-family="monospace" font-size="10" fill="#777777">Foreign Key constraints, indexed queries, and stock mutation triggers</text>
+</svg>

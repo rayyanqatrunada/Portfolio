@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="800" height="500" fill="none">
+  <!-- Background -->
+  <rect width="800" height="500" fill="#EAEAEA"/>
+  
+  <!-- Browser Frame -->
+  <rect x="50" y="40" width="700" height="420" rx="4" fill="#FFFFFF" stroke="#D1D1D1" stroke-width="2"/>
+  <rect x="50" y="40" width="700" height="36" fill="#F4F4F4" stroke="#D1D1D1" stroke-width="1"/>
+  
+  <!-- Browser Window Dots -->
+  <circle cx="75" cy="58" r="5" fill="#C4C4C4"/>
+  <circle cx="95" cy="58" r="5" fill="#C4C4C4"/>
+  <circle cx="115" cy="58" r="5" fill="#C4C4C4"/>
+  
+  <!-- Address bar -->
+  <rect x="145" y="48" width="510" height="20" rx="3" fill="#FFFFFF" stroke="#E0E0E0"/>
+  <text x="160" y="62" font-family="monospace" font-size="11" fill="#777777">tsm-vocational.sch.id/portal/cms</text>
+  
+  <!-- CMS Top Bar -->
+  <rect x="80" y="96" width="160" height="20" fill="#171717"/>
+  <text x="92" y="110" font-family="sans-serif" font-weight="700" font-size="11" fill="#FFFFFF" letter-spacing="1">TSM PORTAL CMS</text>
+  <rect x="540" y="96" width="170" height="20" fill="#F0F0F0" stroke="#E0E0E0"/>
+  <text x="555" y="110" font-family="sans-serif" font-size="10" fill="#666666">RBAC: Admin / Instructor</text>
+
+  <!-- Left Stats & Navigation Panel -->
+  <rect x="80" y="130" width="180" height="300" fill="#FAFAFA" stroke="#E5E5E5"/>
+  <text x="100" y="156" font-family="sans-serif" font-weight="700" font-size="11" fill="#171717">MODULES</text>
+  
+  <rect x="95" y="170" width="150" height="26" fill="#EAEAEA" rx="2"/>
+  <text x="105" y="187" font-family="sans-serif" font-weight="600" font-size="11" fill="#171717">Content &amp; News CMS</text>
+  
+  <text x="105" y="222" font-family="sans-serif" font-size="11" fill="#666666">Curriculum Structure</text>
+  <text x="105" y="252" font-family="sans-serif" font-size="11" fill="#666666">Workshop Equipment</text>
+  <text x="105" y="282" font-family="sans-serif" font-size="11" fill="#666666">Student Certifications</text>
+  <text x="105" y="312" font-family="sans-serif" font-size="11" fill="#666666">Access Logs</text>
+
+  <!-- Right CMS Management View -->
+  <rect x="280" y="130" width="430" height="300" fill="#FFFFFF" stroke="#E5E5E5"/>
+  <rect x="280" y="130" width="430" height="36" fill="#F5F5F5" stroke="#E5E5E5"/>
+  <text x="300" y="153" font-family="sans-serif" font-weight="700" font-size="11" fill="#333333">PUBLISHED POSTS &amp; CURRICULUM</text>
+  <text x="610" y="153" font-family="monospace" font-size="10" fill="#666666">STATUS</text>
+
+  <!-- Article Row 1 -->
+  <line x1="280" y1="200" x2="710" y2="200" stroke="#F0F0F0"/>
+  <text x="300" y="185" font-family="sans-serif" font-weight="600" font-size="11" fill="#171717">Standar Uji Kompetensi Keahlian TSM 2026</text>
+  <text x="300" y="195" font-family="monospace" font-size="9" fill="#888888">Slug: /standar-ukk-tsm-2026 | Author: Admin | Views: 1.4k</text>
+  <rect x="610" y="174" width="75" height="18" rx="2" fill="#EAEAEA"/>
+  <text x="618" y="187" font-family="sans-serif" font-weight="600" font-size="9" fill="#171717">PUBLISHED</text>
+
+  <!-- Article Row 2 -->
+  <line x1="280" y1="245" x2="710" y2="245" stroke="#F0F0F0"/>
+  <text x="300" y="230" font-family="sans-serif" font-weight="600" font-size="11" fill="#171717">Jadwal Praktik Sistem Injeksi &amp; Kelistrikan</text>
+  <text x="300" y="240" font-family="monospace" font-size="9" fill="#888888">Slug: /jadwal-praktik-injeksi | Author: Instruktur | Views: 890</text>
+  <rect x="610" y="219" width="75" height="18" rx="2" fill="#EAEAEA"/>
+  <text x="618" y="232" font-family="sans-serif" font-weight="600" font-size="9" fill="#171717">PUBLISHED</text>
+
+  <!-- Technical Spec Box -->
+  <rect x="300" y="275" width="390" height="135" fill="#F8F8F8" stroke="#DCDCDC" rx="2"/>
+  <text x="315" y="298" font-family="sans-serif" font-weight="700" font-size="10" fill="#171717" letter-spacing="1">CMS BACKEND ARCHITECTURE</text>
+  <text x="315" y="320" font-family="monospace" font-size="10" fill="#555555">• Role-Based Access Control (Superadmin, Teacher, Editor)</text>
+  <text x="315" y="340" font-family="monospace" font-size="10" fill="#555555">• Structured relational data: posts, categories, media, tags</text>
+  <text x="315" y="360" font-family="monospace" font-size="10" fill="#555555">• Server-side validation, CSRF protection &amp; sanitization</text>
+  <text x="315" y="380" font-family="monospace" font-size="10" fill="#777777">• Optimized MySQL queries with database indexing</text>
+</svg>

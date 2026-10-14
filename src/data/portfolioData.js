@@ -29,6 +29,7 @@ export const profileData = {
 export const navLinks = [
   { id: 'home', label: 'HOME', href: '#home' },
   { id: 'about', label: 'ABOUT', href: '#about' },
+  { id: 'skills', label: 'SKILLS', href: '#skills' },
   { id: 'projects', label: 'PROJECTS', href: '#projects' },
   { id: 'contact', label: 'CONTACT', href: '#contact' },
 ]
