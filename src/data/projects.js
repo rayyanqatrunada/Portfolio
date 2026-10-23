@@ -2,6 +2,10 @@ import compifyImg from '../assets/Project Image/Compify 3_4.jpg'
 import tsmPortalImg from '../assets/Project Image/TSM 3_4.jpg'
 import pmartImg from '../assets/Project Image/PMART 3_4.jpg'
 import studyImg from '../assets/Project Image/Study 3_4.jpg'
+import compify11Img from '../assets/Project Image/1_1 compify.jpg'
+import tsmPortal11Img from '../assets/Project Image/1_1 tsm.jpg'
+import pmart11Img from '../assets/Project Image/1_1 pmart.jpg'
+import study11Img from '../assets/Project Image/1_1 study.jpg'
 import { projectDetailsData } from './projectDetails'
 
 /**
@@ -20,6 +24,7 @@ export const projectsData = [
       'Computer hardware e-commerce platform with catalog management, relational brand/category schemas, and customer ordering.',
     techStack: ['PHP', 'Laravel', 'MySQL', 'Livewire'],
     image: compifyImg,
+    squareImage: compify11Img,
     imageAlt: 'Compify Computer Hardware E-Commerce backend architecture overview',
     liveUrl: null,
     repoUrl: 'https://github.com/rayyanqatrunada/Compify',
@@ -37,6 +42,7 @@ export const projectsData = [
       'Department CMS portal featuring role-based access control (RBAC), structured article publishing, and normalized database schemas.',
     techStack: ['PHP', 'Laravel', 'MySQL', 'Filament'],
     image: tsmPortalImg,
+    squareImage: tsmPortal11Img,
     imageAlt: 'TSM Department Portal CMS management dashboard schematic',
     liveUrl: null,
     repoUrl: 'https://github.com/rayyanqatrunada/toweb',
@@ -54,6 +60,7 @@ export const projectsData = [
       'Student commerce marketplace engine managing merchant booth requests, transaction records, and structured product catalogs.',
     techStack: ['PHP', 'Laravel', 'MySQL', 'Filament'],
     image: pmartImg,
+    squareImage: pmart11Img,
     imageAlt: 'PMart student commerce transaction processing overview',
     liveUrl: null,
     repoUrl: 'https://github.com/rayyanqatrunada/PMart-test',
@@ -71,6 +78,7 @@ export const projectsData = [
       'Personal learning repository and code laboratory documenting continuous explorations across Python, algorithms, data structures, and modern web architectures.',
     techStack: ['Python', 'HTML/CSS', 'Algorithms', 'Git'],
     image: studyImg,
+    squareImage: study11Img,
     imageAlt: 'Study knowledge base and code experiment archive schematic',
     liveUrl: null,
     repoUrl: 'https://github.com/rayyanqatrunada/Study',

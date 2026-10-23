@@ -71,6 +71,7 @@ export default function ResumePage({ onBack }) {
                 Qatrunada
               </span>
             </h1>
+            <span className="sr-only">Rayyan Qatrunada Qhoniansyah Putra — Curriculum Vitae &amp; Portfolio Specification</span>
           </div>
 
           {/* 4-Column Ruled Metadata Strip (Concise on mobile, full on desktop) */}

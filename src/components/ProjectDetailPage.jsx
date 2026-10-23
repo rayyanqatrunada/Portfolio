@@ -1,7 +1,17 @@
 import { useEffect } from 'react'
 import Container from './Container'
 import SignalArrow from './SignalArrow'
-import compifyReferencePhoto from '../assets/projects/compify-reference-photo.jpg'
+import compify11Img from '../assets/Project Image/1_1 compify.jpg'
+import tsm11Img from '../assets/Project Image/1_1 tsm.jpg'
+import pmart11Img from '../assets/Project Image/1_1 pmart.jpg'
+import study11Img from '../assets/Project Image/1_1 study.jpg'
+
+const PROJECT_1_1_IMAGES = {
+  compify: compify11Img,
+  'tsm-portal': tsm11Img,
+  pmart: pmart11Img,
+  study: study11Img,
+}
 
 /**
  * Editorial Case Study Content for Compify
@@ -74,7 +84,7 @@ function getProjectCaseStudyData(project) {
   if (project.id === 'compify') {
     return {
       ...COMPIFY_DATA,
-      image: compifyReferencePhoto,
+      image: project.squareImage || PROJECT_1_1_IMAGES['compify'],
       repoUrl: project.repoUrl,
     }
   }
@@ -126,7 +136,7 @@ function getProjectCaseStudyData(project) {
         'OPEN-SOURCE SHARING',
         'ENGINEERING MASTERY',
       ],
-      image: project.image,
+      image: project.squareImage || PROJECT_1_1_IMAGES['study'],
       repoUrl: project.repoUrl,
     }
   }
@@ -179,7 +189,7 @@ function getProjectCaseStudyData(project) {
       'INVENTORY CONSISTENCY',
       'MAINTAINABILITY BENCHMARKS',
     ],
-    image: project.image,
+    image: project.squareImage || PROJECT_1_1_IMAGES[project.id] || project.image,
     repoUrl: project.repoUrl,
   }
 }
@@ -259,16 +269,12 @@ export default function ProjectDetailPage({ project, onBack }) {
 
         {/* ================= TOP: image · empty · scope + about ================= */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-x-5 gap-y-10">
-          {/* Image — Figma: 423 × 423 at left 40, top 91 */}
-          <div className="w-full aspect-square overflow-hidden bg-neutral-100 flex items-center justify-center border border-black/5">
+          {/* Image — 1:1 Square Visual Spec matching Figma 423 × 423 */}
+          <div className="w-full aspect-square overflow-hidden bg-white flex items-center justify-center border border-black/10">
             <img
               src={caseStudy.image}
               alt={`${caseStudy.title} visual`}
-              className={`w-full h-full ${
-                typeof caseStudy.image === 'string' && caseStudy.image.includes('.svg')
-                  ? 'object-contain p-3'
-                  : 'object-cover'
-              }`}
+              className="w-full h-full object-cover"
             />
           </div>
 

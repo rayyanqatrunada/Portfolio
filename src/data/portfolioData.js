@@ -6,6 +6,7 @@
 export const profileData = {
   name: 'Rayy',
   fullName: 'Rayyan Qatrunada',
+  formalFullName: 'Rayyan Qatrunada Qhoniansyah Putra',
   logoText: 'RAYY.DEV',
   role: 'Backend & Systems Developer',
   location: 'Jepara, Indonesia [GMT+7]',

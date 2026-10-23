@@ -35,6 +35,7 @@ function App() {
         setIsResume(true)
         setActiveProject(null)
         window.scrollTo(0, 0)
+        document.title = 'Resume / CV — Rayyan Qatrunada | Backend Developer'
         return
       }
       setIsResume(false)
@@ -47,10 +48,12 @@ function App() {
         if (project) {
           setActiveProject(project)
           window.scrollTo(0, 0)
+          document.title = `${project.displayTitle || project.title} — Rayyan Qatrunada Portfolio`
           return
         }
       }
       setActiveProject(null)
+      document.title = 'Rayyan Qatrunada — Portfolio | Backend Developer & Systems Architecture'
 
       // Coming from a detail or resume page via a navbar/footer anchor (e.g. #skills):
       // the target section only exists after the portfolio re-renders, so scroll afterwards.

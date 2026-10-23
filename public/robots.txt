@@ -1,0 +1,6 @@
+# robots.txt for Rayyan Qatrunada Portfolio (RAYY.DEV)
+User-agent: *
+Allow: /
+
+# Sitemap Index
+Sitemap: /sitemap.xml

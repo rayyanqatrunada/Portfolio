@@ -240,6 +240,7 @@ export default function Hero() {
         <div className="mb-8 sm:mb-12 select-none w-full">
           {/* Mobile Layout (< lg): Compact Centered Justified Column matching Signal-A reference */}
           <h1 className="flex lg:hidden text-[20px] xs:text-[22px] sm:text-[28px] md:text-[34px] text-black leading-[1.1] sm:leading-[1.05] uppercase w-full max-w-[275px] xs:max-w-[295px] sm:max-w-[340px] mx-auto flex-col tracking-tight select-none">
+            <span className="sr-only">Rayyan Qatrunada Portfolio — Rayyan Qatrunada Qhoniansyah Putra, Backend Developer</span>
             {/* Line 1: Centered Brand Name */}
             <span className="w-full flex justify-center items-center font-serif font-normal">
               <span className="shrink-0 flex items-center">
@@ -293,6 +294,7 @@ export default function Hero() {
 
           {/* Desktop Layout (>= lg): Exact 4-Line Justified Headline */}
           <h1 className="hidden lg:flex text-[60px] xl:text-[72px] 2xl:text-[78px] text-black leading-[0.94] uppercase w-full flex-col">
+            <span className="sr-only">Rayyan Qatrunada Portfolio — Rayyan Qatrunada Qhoniansyah Putra, Backend Developer</span>
             {/* Line 1: ● RAYY.DEV IS A (serif) ... BACKEND DEVELOPER (bold sans) */}
             <span className="w-full flex justify-between items-baseline font-serif font-normal whitespace-nowrap">
               <span className="shrink-0 flex items-center">
@@ -411,7 +413,8 @@ export default function Hero() {
             <div className="w-full lg:w-[421.33px] flex flex-col justify-end lg:pt-[240px] shrink-0">
               <p className="font-sans text-[14px] sm:text-[15px] leading-[20px] tracking-[0.5px] text-black font-light text-justify sm:text-left">
                 <span className="inline-block w-[70px]" aria-hidden="true" />
-                I am a backend and systems developer who constructs dependable digital architectures, relational database schemas, and robust API endpoints. Focused on clean request lifecycles, normalized data flow, and predictable contracts that allow software to scale with absolute stability.
+                I am <span className="font-medium text-black">Rayyan Qatrunada</span>, a backend and systems developer who constructs dependable digital architectures, relational database schemas, and robust API endpoints. Focused on clean request lifecycles, normalized data flow, and predictable contracts that allow software to scale with absolute stability.
+                <span className="sr-only"> Official portfolio of Rayyan Qatrunada Qhoniansyah Putra.</span>
               </p>
 
               <div className="pt-8 flex items-center gap-6 font-mono text-[11px] sm:text-xs uppercase tracking-wider">
