@@ -206,18 +206,20 @@ function getProjectCaseStudyData(project) {
  */
 function ServiceColumn({ letter, title, items }) {
   return (
-    <div className="flex flex-col gap-[19.9px]">
-      <span className="font-sans font-bold text-[14px] leading-[14px] uppercase text-black">
-        {letter}
-      </span>
-      <h3 className="font-sans font-bold text-[17px] leading-[17px] uppercase tracking-tight text-black">
-        {title}
-      </h3>
-      <ul>
+    <div className="flex flex-col gap-2 sm:gap-2.5">
+      <div className="flex flex-col gap-0.5">
+        <span className="font-sans font-bold text-[13px] sm:text-[14px] leading-tight uppercase text-black">
+          {letter}
+        </span>
+        <h3 className="font-sans font-bold text-[14px] sm:text-[15px] leading-tight uppercase tracking-tight text-black mb-1">
+          {title}
+        </h3>
+      </div>
+      <ul className="border-b-[0.73px] border-black">
         {items.map((item) => (
           <li
             key={item}
-            className="h-[55px] flex items-center justify-end border-t-[0.73px] border-black font-mono font-light text-[12px] leading-[12px] uppercase text-neutral-600 hover:text-black transition-colors text-right"
+            className="h-[32px] sm:h-[35px] flex items-center justify-end border-t-[0.73px] border-black font-mono font-light text-[11px] sm:text-[12px] leading-none uppercase text-neutral-600 hover:text-black transition-colors text-right"
           >
             {item}
           </li>
@@ -267,22 +269,33 @@ export default function ProjectDetailPage({ project, onBack }) {
           </button>
         </div>
 
-        {/* ================= TOP: image · empty · scope + about ================= */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-x-5 gap-y-10">
-          {/* Image — 1:1 Square Visual Spec matching Figma 423 × 423 */}
-          <div className="w-full aspect-square overflow-hidden bg-white flex items-center justify-center border border-black/10">
-            <img
-              src={caseStudy.image}
-              alt={`${caseStudy.title} visual`}
-              className="w-full h-full object-cover"
-            />
+        {/* ================= TOP: image + title · empty · scope + about ================= */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-x-5 gap-y-6 md:gap-y-0">
+          {/* Column 1: Image — 1:1 Square Visual Spec + Title at bottom-left of photo */}
+          <div className="flex flex-col justify-between">
+            <div>
+              <div className="w-full aspect-square overflow-hidden bg-white flex items-center justify-center border border-black/10">
+                <img
+                  src={caseStudy.image}
+                  alt={`${caseStudy.title} visual`}
+                  className="w-full h-full object-cover"
+                />
+              </div>
+              <div className="pt-3 sm:pt-4">
+                <h1 className="font-sans font-light text-[20px] sm:text-[22px] md:text-[24px] leading-tight uppercase text-black tracking-tight">
+                  {caseStudy.title}
+                </h1>
+              </div>
+            </div>
+            {/* Mobile hairline divider right under title */}
+            <div className="block md:hidden mt-4 w-full border-t border-black" />
           </div>
 
           <div className="hidden md:block" aria-hidden="true" />
 
           {/* Scope (top, at y=97) & About paragraph (bottom, ends ~y=520) */}
-          <div className="flex flex-col justify-between pt-[6px] gap-16">
-            <div className="flex justify-between items-start text-[15px] leading-[20px] tracking-[0.5px] font-normal uppercase">
+          <div className="flex flex-col justify-between pt-[6px] gap-8 md:gap-16">
+            <div className="flex justify-between items-start text-[14px] sm:text-[15px] leading-[20px] tracking-[0.5px] font-normal uppercase">
               <span>Project Scope</span>
               <div className="text-right">
                 {caseStudy.scopeLabels.map((label) => (
@@ -291,24 +304,19 @@ export default function ProjectDetailPage({ project, onBack }) {
               </div>
             </div>
 
-            <p className="text-[15px] leading-[19.5px] tracking-[0.5px] font-light indent-[70px] -mb-[6px]">
+            <p className="text-[14px] sm:text-[15px] leading-[20px] sm:leading-[22px] tracking-[0.3px] font-light indent-[50px] sm:indent-[70px]">
               {caseStudy.about}
             </p>
           </div>
         </div>
 
-        {/* Title (y=527, 20px/300) + full-width hairline (y=547) */}
-        <div className="mt-[13px]">
-          <h1 className="font-sans font-light text-[20px] leading-[12px] uppercase text-black">
-            {caseStudy.title}
-          </h1>
-          <div className="mt-[8px] w-full border-t border-black" />
-        </div>
+        {/* Full-width hairline divider below top hero section */}
+        <div className="mt-4 sm:mt-6 w-full border-t border-black" />
 
         {/* ================= MIDDLE: Asymmetric Staggered (Kiri Atas & Kanan Bawah) =================
             Posisi agak ke tengah, mengikuti layout 2 paragraf di bawah philosophy (ml-[110.33px], w-[973px], gap-[130.34px]) */}
-        <section className="pt-16 sm:pt-20 lg:pt-24 pb-12 sm:pb-16">
-          <div className="w-full mx-auto lg:w-[973px] flex flex-col lg:flex-row justify-between items-start gap-12 lg:gap-[130.34px]">
+        <section className="pt-12 sm:pt-16 lg:pt-20 pb-10 sm:pb-14">
+          <div className="w-full mx-auto lg:w-[973px] flex flex-col lg:flex-row justify-between items-start gap-10 lg:gap-[130.34px]">
             {/* Left Column (Kiri Atas): sits near the top */}
             <div className="w-full lg:w-[421.33px] shrink-0 flex flex-col">
               <h2 className="font-sans font-bold text-[13px] sm:text-[14px] uppercase tracking-wider text-black mb-3">
@@ -321,7 +329,7 @@ export default function ProjectDetailPage({ project, onBack }) {
             </div>
 
             {/* Right Column (Kanan Bawah): staggered down towards bottom, sits above SERVICES */}
-            <div className="w-full lg:w-[421.33px] shrink-0 flex flex-col lg:pt-[220px]">
+            <div className="w-full lg:w-[421.33px] shrink-0 flex flex-col lg:pt-[160px]">
               <h2 className="font-sans font-bold text-[13px] sm:text-[14px] uppercase tracking-wider text-black mb-3">
                 02 / Core Function
               </h2>
@@ -334,15 +342,15 @@ export default function ProjectDetailPage({ project, onBack }) {
         </section>
 
         {/* ================= BOTTOM: SERVICES + A / B / C ================= */}
-        <section>
-          {/* SERVICES — right aligned, bold 17px, 20px margin below */}
-          <div className="flex justify-end pb-[20px]">
-            <span className="font-sans font-bold text-[17px] leading-[17px] uppercase text-black">
+        <section className="pt-6 sm:pt-10">
+          {/* SERVICES — right aligned, bold 17px, compact spacing */}
+          <div className="flex justify-end pb-3 sm:pb-4">
+            <span className="font-sans font-bold text-[15px] sm:text-[17px] leading-tight uppercase text-black">
               Services
             </span>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-x-5 gap-y-14">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-x-5 gap-y-6 sm:gap-y-8 md:gap-y-0">
             <ServiceColumn letter="A" title="Technology" items={caseStudy.technology} />
             <ServiceColumn letter="B" title="Art Direction" items={caseStudy.artDirection} />
             <ServiceColumn letter="C" title="Product Research" items={caseStudy.productResearch} />

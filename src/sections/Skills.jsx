@@ -111,10 +111,10 @@ export default function Skills() {
         {/* Two-Column Grid matching Signal-A & Figma spec: 642px + 20px gap + 642px */}
         <div className="w-full border-t border-black flex flex-col lg:flex-row justify-between items-start gap-4 lg:gap-[20px]">
           {/* Left Column (Figma width: 642px): Aligned with row 1 under the unified top line */}
-          <div className="w-full lg:w-[642px] shrink-0 min-h-[33px] sm:min-h-[50px] lg:h-[54px] flex items-center">
+          <div className="w-full lg:w-[642px] shrink-0 min-h-[36px] sm:min-h-[50px] lg:h-[54px] flex items-center">
             <h2
               id="skills-heading"
-              className="font-mono text-[10px] sm:text-[12px] uppercase tracking-wider text-black select-none"
+              className="font-mono text-[11px] sm:text-[12px] uppercase tracking-wider text-black select-none"
             >
               SKILLS &amp; TECHNOLOGIES
             </h2>
@@ -130,15 +130,15 @@ export default function Skills() {
                   key={skill.id}
                   onMouseEnter={() => setHoveredId(skill.id)}
                   onMouseLeave={() => setHoveredId(null)}
-                  className="group w-full h-[33px] sm:h-[45px] lg:h-[54px] border-b border-black flex items-center justify-between gap-3 px-0 sm:px-2 select-none hover:bg-[#fafafa] transition-colors"
+                  className="group w-full h-[38px] xs:h-[42px] sm:h-[48px] lg:h-[54px] border-b border-black flex items-center justify-between gap-3 px-0 sm:px-2 select-none hover:bg-[#fafafa] transition-colors"
                 >
                   {/* Left: Bold Title matching example screenshot */}
-                  <span className="font-mono sm:font-sans font-medium sm:font-bold text-[10px] sm:text-[15px] lg:text-[17px] tracking-tight uppercase text-black transition-all truncate pr-2">
+                  <span className="font-sans font-bold text-[12px] xs:text-[13.5px] sm:text-[15px] lg:text-[17px] tracking-tight uppercase text-black transition-all truncate pr-2">
                     {skill.name}
                   </span>
 
                   {/* Right: Monospace Uppercase Metadata matching example screenshot */}
-                  <span className="font-mono text-[10px] sm:text-[11px] lg:text-[12px] uppercase tracking-wider text-neutral-500 sm:text-neutral-800 group-hover:text-black text-right shrink-0">
+                  <span className="font-mono text-[10.5px] xs:text-[11px] sm:text-[11.5px] lg:text-[12px] uppercase tracking-wider text-neutral-600 sm:text-neutral-800 group-hover:text-black text-right shrink-0">
                     <ScrambleText text={skill.detail} isHovered={isHovered} />
                   </span>
                 </div>

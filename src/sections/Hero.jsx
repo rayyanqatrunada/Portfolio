@@ -239,7 +239,7 @@ export default function Hero() {
         {/* Editorial Headline — High Contrast Bold Sans & Elegant Serif matching Signal-A */}
         <div className="mb-8 sm:mb-12 select-none w-full">
           {/* Mobile Layout (< lg): Compact Centered Justified Column matching Signal-A reference */}
-          <h1 className="flex lg:hidden text-[20px] xs:text-[22px] sm:text-[28px] md:text-[34px] text-black leading-[1.1] sm:leading-[1.05] uppercase w-full max-w-[275px] xs:max-w-[295px] sm:max-w-[340px] mx-auto flex-col tracking-tight select-none">
+          <h1 className="flex lg:hidden text-[23px] xs:text-[25px] sm:text-[31px] md:text-[36px] text-black leading-[1.1] sm:leading-[1.05] uppercase w-full max-w-[315px] xs:max-w-[340px] sm:max-w-[390px] mx-auto flex-col tracking-tight select-none">
             <span className="sr-only">Rayyan Qatrunada Portfolio — Rayyan Qatrunada Qhoniansyah Putra, Backend Developer</span>
             {/* Line 1: Centered Brand Name */}
             <span className="w-full flex justify-center items-center font-serif font-normal">
@@ -411,7 +411,7 @@ export default function Hero() {
           <div className="flex flex-col lg:flex-row justify-between items-end gap-8 lg:gap-[20px] pb-8 w-full">
             {/* Left Column (Figma: width 421.33px; height: 469.89px; padding: 313.89px 0px 0px) */}
             <div className="w-full lg:w-[421.33px] flex flex-col justify-end lg:pt-[240px] shrink-0">
-              <p className="font-sans text-[14px] sm:text-[15px] leading-[20px] tracking-[0.5px] text-black font-light text-justify sm:text-left">
+              <p className="font-sans text-[15px] sm:text-[16px] leading-[22px] sm:leading-[24px] tracking-[0.3px] text-black font-light text-justify sm:text-left">
                 <span className="inline-block w-[70px]" aria-hidden="true" />
                 I am <span className="font-medium text-black">Rayyan Qatrunada</span>, a backend and systems developer who constructs dependable digital architectures, relational database schemas, and robust API endpoints. Focused on clean request lifecycles, normalized data flow, and predictable contracts that allow software to scale with absolute stability.
                 <span className="sr-only"> Official portfolio of Rayyan Qatrunada Qhoniansyah Putra.</span>

@@ -24,7 +24,7 @@ export default function PhilosophyNarrative() {
           <div className="w-full lg:w-[421.33px] shrink-0 flex flex-col">
             {/* Headline (Bold statement matching reference) */}
             <div className="w-full pb-[36px] sm:pb-[60px]">
-              <h3 className="font-sans font-bold text-[15px] sm:text-[17px] leading-[22px] sm:leading-[20px] uppercase tracking-tight text-black flex flex-col gap-1 sm:gap-0">
+              <h3 className="font-sans font-bold text-[18px] sm:text-[20px] leading-[26px] sm:leading-[24px] uppercase tracking-tight text-black flex flex-col gap-1 sm:gap-0">
                 <span className="w-full flex justify-between items-baseline pl-[50px] sm:pl-[60px]">
                   <span>RAYY.DEV</span>
                   <span>BELIEVES</span>
@@ -42,8 +42,8 @@ export default function PhilosophyNarrative() {
               </h3>
             </div>
 
-            {/* Left Paragraph (Figma spec: width: 421.33px, font-size: 15px, line-height: 20px, letter-spacing: 0.5px, font-weight: 300, indent: 70px) */}
-            <p className="font-sans font-light text-[14px] sm:text-[15px] leading-[22px] sm:leading-[24px] tracking-[0.3px] text-black text-justify w-full lg:w-[421.33px]">
+            {/* Left Paragraph (Figma spec enlarged ~20% for readability) */}
+            <p className="font-sans font-light text-[16px] sm:text-[18px] leading-[25px] sm:leading-[27px] tracking-[0.3px] text-black text-justify w-full lg:w-[421.33px]">
               <span className="inline-block w-[60px] sm:w-[70px]" aria-hidden="true" />
               The foundation of meaningful software comes from understanding the problem before writing the solution. Rushed decisions may produce quick results, but rarely create lasting value. I believe that thoughtful planning, structured logic, and consistent execution lead to systems that are reliable, maintainable, and built around real needs.
             </p>
@@ -72,8 +72,8 @@ export default function PhilosophyNarrative() {
               <span className="text-right whitespace-nowrap">PRACTICAL PURPOSE</span>
             </div>
 
-            {/* Paragraph 2 (Figma gap: 100px from pill bar, width: 421.33px, font-size: 15px, line-height: 20px, letter-spacing: 0.5px, font-weight: 300, indent: 70px) */}
-            <p className="font-sans font-light text-[14px] sm:text-[15px] leading-[22px] sm:leading-[24px] tracking-[0.3px] text-black text-justify mt-[50px] sm:mt-[100px] w-full lg:w-[421.33px]">
+            {/* Paragraph 2 (Figma gap: 100px from pill bar, enlarged ~20% for readability) */}
+            <p className="font-sans font-light text-[16px] sm:text-[18px] leading-[25px] sm:leading-[27px] tracking-[0.3px] text-black text-justify mt-[50px] sm:mt-[100px] w-full lg:w-[421.33px]">
               <span className="inline-block w-[60px] sm:w-[70px]" aria-hidden="true" />
               My approach focuses on the balance between technical precision and practical purpose. From database design to application logic, every decision should serve a reason. The goal is not to build the most complex system, but to create dependable digital products that solve problems clearly, perform consistently, and remain useful over time.
             </p>

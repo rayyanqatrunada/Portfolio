@@ -72,7 +72,7 @@ function MenuNavItem({ item, isActive, onClick }) {
       onMouseLeave={handleMouseLeave}
       onFocus={triggerScramble}
       onBlur={handleMouseLeave}
-      className={`h-[23px] flex items-center justify-end font-mono text-[11px] sm:text-[12px] uppercase tracking-wider transition-colors duration-150 select-none ${
+      className={`h-[26px] sm:h-[23px] flex items-center justify-end font-mono text-[12px] sm:text-[12px] uppercase tracking-wider transition-colors duration-150 select-none ${
         isActive
           ? 'text-black font-semibold'
           : 'text-[#24363F]/75 hover:text-black'
@@ -98,6 +98,7 @@ export default function Navbar() {
   // Animation states: 'closed' | 'sliding_to_clock' | 'open' | 'shrinking' | 'sliding_to_edge'
   const [animStep, setAnimStep] = useState('closed')
   const [slideDistance, setSlideDistance] = useState(122)
+  const [isMobileNav, setIsMobileNav] = useState(false)
 
   const navRef = useRef(null)
   const timer1Ref = useRef(null)
@@ -141,14 +142,12 @@ export default function Navbar() {
     return () => clearInterval(interval)
   }, [])
 
-  // Responsive slide distance (122px on desktop, 110px on small mobile)
+  // Responsive slide distance and mobile sizing
   useEffect(() => {
     const handleResize = () => {
-      if (window.innerWidth < 640) {
-        setSlideDistance(110)
-      } else {
-        setSlideDistance(122)
-      }
+      const mobile = window.innerWidth < 640
+      setIsMobileNav(mobile)
+      setSlideDistance(mobile ? 116 : 122)
     }
     handleResize()
     window.addEventListener('resize', handleResize)
@@ -322,23 +321,27 @@ export default function Navbar() {
   ]
 
   return (
-    <header className="no-print sticky top-0 z-50 w-full h-[50px]">
+    <header className="no-print sticky top-0 z-50 w-full h-[56px] sm:h-[50px]">
       <div
         ref={navRef}
         className={`absolute top-0 left-0 w-full bg-[#FDFDFD] select-none transition-[height,box-shadow] duration-[340ms] ease-[cubic-bezier(0.22,1,0.36,1)] overflow-hidden ${
           isExpanded ? 'shadow-[0_12px_30px_-10px_rgba(0,0,0,0.06)]' : ''
         }`}
-        style={{ height: isExpanded ? '148px' : '50px' }}
+        style={{
+          height: isExpanded
+            ? (isMobileNav ? '164px' : '148px')
+            : (isMobileNav ? '56px' : '50px'),
+        }}
       >
-        <div className="relative mx-auto w-full h-full max-w-[1736px] px-6 sm:px-8 flex items-start justify-between pt-[13px]">
+        <div className="relative mx-auto w-full h-full max-w-[1736px] px-5 sm:px-8 flex items-start justify-between pt-[14px] sm:pt-[13px]">
           {/* Left: Pure text logo without icon */}
           <a
             href="#home"
             onClick={(e) => handleLinkClick('#home', e)}
-            className="flex items-center h-[24px] text-[#24363F] hover:opacity-70 transition-opacity shrink-0"
+            className="flex items-center h-[28px] sm:h-[24px] text-[#24363F] hover:opacity-70 transition-opacity shrink-0"
             aria-label="Backend Developer - Home"
           >
-            <span className="font-mono text-[11px] sm:text-[12px] font-medium tracking-widest uppercase">
+            <span className="font-mono text-[12px] xs:text-[13px] sm:text-[12px] font-medium tracking-widest uppercase">
               BACKEND DEVELOPER
             </span>
           </a>
@@ -356,16 +359,18 @@ export default function Navbar() {
             </div>
 
             {/* Interactive Menu Stage */}
-            <div className="relative w-[162px] sm:w-[174px] h-[120px] pointer-events-auto">
+            <div className="relative w-[170px] sm:w-[174px] h-[132px] sm:h-[120px] pointer-events-auto">
               {/* The Animated Button */}
               <button
                 type="button"
                 onClick={handleToggle}
                 aria-expanded={isExpanded}
                 aria-label={isExpanded ? 'Close menu' : 'Open menu'}
-                className="absolute top-0 left-0 w-[48px] sm:w-[52px] bg-[#24363F]/[0.08] hover:bg-[#24363F]/[0.14] text-[#24363F] flex items-center justify-center cursor-pointer select-none z-20"
+                className="absolute top-0 left-0 w-[54px] sm:w-[52px] bg-[#24363F]/[0.08] hover:bg-[#24363F]/[0.14] text-[#24363F] flex items-center justify-center cursor-pointer select-none z-20"
                 style={{
-                  height: isExpanded ? '120px' : '24px',
+                  height: isExpanded
+                    ? (isMobileNav ? '132px' : '120px')
+                    : (isMobileNav ? '28px' : '24px'),
                   transform: isShifted
                     ? 'translateX(0)'
                     : `translateX(${slideDistance}px)`,
@@ -373,7 +378,7 @@ export default function Navbar() {
                     'transform 420ms cubic-bezier(0.22, 1, 0.36, 1), height 340ms cubic-bezier(0.22, 1, 0.36, 1), background-color 200ms ease',
                 }}
               >
-                <span className="font-mono text-[11px] sm:text-[12px] lowercase leading-[20px] tracking-normal transition-opacity duration-200">
+                <span className="font-mono text-[12px] sm:text-[12px] lowercase leading-[20px] tracking-normal transition-opacity duration-200">
                   {buttonLabel}
                 </span>
               </button>
@@ -381,7 +386,7 @@ export default function Navbar() {
               {/* The Menu Links with Hover Scramble Randomize */}
               <nav
                 aria-label="Navigation Links"
-                className="absolute top-0 right-0 w-[112px] sm:w-[122px] h-[120px] flex flex-col items-end justify-between z-10"
+                className="absolute top-0 right-0 w-[114px] sm:w-[122px] h-[132px] sm:h-[120px] flex flex-col items-end justify-between z-10"
                 style={{
                   opacity: showLinks ? 1 : 0,
                   transform: showLinks ? 'translateX(0)' : 'translateX(6px)',

@@ -19,7 +19,7 @@ export default function EngineeringStatement() {
           </div>
 
           {/* Mobile Layout (< lg): Compact Centered Justified Column matching Signal-A reference */}
-          <blockquote className="block lg:hidden font-serif text-[21px] xs:text-[23px] sm:text-[28px] text-black leading-[1.12] tracking-tight uppercase w-full max-w-[265px] xs:max-w-[285px] sm:max-w-[330px] mx-auto select-none">
+          <blockquote className="block lg:hidden font-serif text-[25px] xs:text-[28px] sm:text-[34px] text-black leading-[1.12] tracking-tight uppercase w-full max-w-[318px] xs:max-w-[345px] sm:max-w-[400px] mx-auto select-none">
             {/* Line 1: Centered Top */}
             <span className="w-full flex justify-center items-baseline">
               <span>RAYY.DEV BUILDS</span>
