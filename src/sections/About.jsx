@@ -1,69 +1,89 @@
 import Container from '../components/Container'
-import SectionHeading from '../components/SectionHeading'
 import { profileData } from '../data/portfolioData'
-import { CheckSquare, Code2 } from 'lucide-react'
 
 /**
- * About Section:
- * Two-column desktop layout matching visual reference.
- * Left: Visual placeholder frame with offset accent outline.
- * Right: Left-aligned "ABOUT ME" heading, summary bio, and technical focus checklist.
+ * Phase 4B — About Section (Signal-A Inspired)
+ * - Visual two-column composition
+ * - Left: Neutral rectangular silhouette frame with fine offset outline (no fake portraits/diagnostics)
+ * - Right: "ABOUT ME", concise personal introduction, and 3 factual focus points
  */
 export default function About() {
   return (
     <section
       id="about"
-      className="scroll-mt-16 py-16 sm:py-24 bg-white border-b border-neutral-100"
+      aria-labelledby="about-me-heading"
+      className="relative scroll-mt-20 py-16 sm:py-24 bg-white border-b border-[#e0e0e0]"
     >
       <Container>
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-12 items-center">
-          {/* Left Column: Visual Frame with Offset Accent */}
-          <div className="lg:col-span-5 flex justify-center lg:justify-start order-2 lg:order-1">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+          {/* Left Column: Visual Rectangular Silhouette Frame with Fine Offset Outline */}
+          <div className="lg:col-span-5 flex justify-center lg:justify-start w-full">
             <div className="relative w-full max-w-[320px] sm:max-w-[360px] aspect-[4/5]">
-              {/* Offset outline frame shifted to the top-left */}
+              {/* Fine Offset Architectural Outline */}
               <div
-                className="absolute -top-3 -left-3 sm:-top-4 sm:-left-4 w-full h-full border border-neutral-900 pointer-events-none rounded-xs"
+                className="absolute -top-3.5 -left-3.5 w-full h-full border border-black pointer-events-none"
                 aria-hidden="true"
               />
 
-              {/* Main neutral surface card */}
-              <div className="relative z-10 w-full h-full bg-[#D6D6D6] border border-neutral-300 flex flex-col items-center justify-center p-6 text-center select-none shadow-xs rounded-xs">
-                <div className="w-16 h-16 rounded-full bg-white/70 flex items-center justify-center text-neutral-800 shadow-2xs mb-4">
-                  <Code2 className="w-8 h-8 stroke-[1.75]" aria-hidden="true" />
+              {/* Neutral Surface & Clear Rectangular Silhouette */}
+              <div className="relative z-10 w-full h-full bg-[#f7f7f7] border border-[#e0e0e0] flex flex-col justify-between p-6 select-none">
+                {/* Top Plate Coordinate */}
+                <div className="flex items-center justify-between font-mono text-[10px] uppercase tracking-widest text-neutral-400">
+                  <span>[ FRAME 02 ]</span>
+                  <span>SILHOUETTE SPEC</span>
                 </div>
-                <p className="text-xs font-bold tracking-widest uppercase text-neutral-800">
-                  Engineering Mindset
-                </p>
-                <p className="text-[11px] font-medium tracking-wider uppercase text-neutral-600 mt-1">
-                  Practical & Scalable Backend Solutions
-                </p>
+
+                {/* Center Abstract Architectural Crosshair */}
+                <div className="my-auto flex items-center justify-center pointer-events-none" aria-hidden="true">
+                  <div className="relative w-8 h-8 flex items-center justify-center opacity-30">
+                    <div className="absolute w-full h-[1px] bg-neutral-600" />
+                    <div className="absolute h-full w-[1px] bg-neutral-600" />
+                  </div>
+                </div>
+
+                {/* Bottom Plate Coordinate */}
+                <div className="pt-3 border-t border-[#e0e0e0] flex items-center justify-between font-mono text-[10px] uppercase text-neutral-400">
+                  <span>NEUTRAL CANVAS</span>
+                  <span>2026</span>
+                </div>
               </div>
             </div>
           </div>
 
-          {/* Right Column: Content & Focus Checklist */}
-          <div className="lg:col-span-7 flex flex-col items-start text-left order-1 lg:order-2">
-            <SectionHeading
-              title={profileData.aboutTitle || 'ABOUT ME'}
-              align="left"
-              className="mb-4 sm:mb-6"
-            />
+          {/* Right Column: Heading, Introduction & Three Focus Points */}
+          <div className="lg:col-span-7 flex flex-col justify-center">
+            {/* Eyebrow & Main Heading */}
+            <div className="font-mono text-xs text-neutral-500 uppercase tracking-widest mb-1">
+              [ 02 / ABOUT ]
+            </div>
+            <h2
+              id="about-me-heading"
+              className="font-serif text-3xl sm:text-4xl md:text-5xl text-black uppercase tracking-tight mb-4"
+            >
+              ABOUT ME
+            </h2>
+            <div className="w-full h-[1px] bg-black mb-6" aria-hidden="true" />
 
-            <p className="text-sm sm:text-base text-neutral-600 leading-relaxed max-w-xl">
+            {/* Concise Personal Introduction */}
+            <p className="text-sm sm:text-base text-neutral-700 leading-relaxed mb-8">
               {profileData.aboutDescription}
             </p>
 
-            {/* Core Competencies / Focus Checklist */}
-            <div className="mt-8 w-full max-w-lg space-y-3.5">
-              {profileData.aboutFocusList.map((item, index) => (
-                <div
-                  key={index}
-                  className="flex items-center gap-3 p-3 bg-neutral-50 border border-neutral-200/80 rounded-xs"
-                >
-                  <CheckSquare className="w-5 h-5 text-neutral-900 shrink-0" aria-hidden="true" />
-                  <span className="text-xs sm:text-sm font-semibold tracking-wide text-neutral-800 uppercase">
-                    {item}
+            {/* Three Short Focus Points Supported by Real Data */}
+            <div className="divide-y divide-[#e0e0e0] border-t border-b border-[#e0e0e0]">
+              {profileData.aboutPrinciples.map((point) => (
+                <div key={point.index} className="py-4 sm:py-5 flex flex-col sm:flex-row sm:items-baseline gap-2 sm:gap-6">
+                  <span className="font-mono text-xs text-neutral-400 shrink-0 font-semibold">
+                    [ {point.index} ]
                   </span>
+                  <div>
+                    <h3 className="font-mono text-xs sm:text-sm font-bold text-black uppercase tracking-wider mb-1">
+                      {point.title}
+                    </h3>
+                    <p className="text-xs sm:text-sm text-neutral-600 leading-relaxed">
+                      {point.description}
+                    </p>
+                  </div>
                 </div>
               ))}
             </div>

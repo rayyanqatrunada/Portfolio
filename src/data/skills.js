@@ -1,55 +1,164 @@
 /**
  * Technical Skills Data
- * Categorized technical capabilities focused on backend development, databases, frontend basics, and tooling.
+ * Categorized technical capabilities focused on backend engineering,
+ * database modeling, API development, workflow tools, and frontend basics.
+ * Pure factual inventory without arbitrary percentage or qualitative ratings.
  */
 
 export const skillCategories = [
   {
     id: 'backend',
     category: 'Backend Development',
-    iconName: 'Server',
-    description: 'Core business logic, MVC frameworks, and API endpoints.',
+    summary: 'Application logic, MVC architecture, and request lifecycle management.',
     skills: [
-      { name: 'PHP', level: 'Core' },
-      { name: 'Laravel', level: 'Framework' },
-      { name: 'RESTful API', level: 'Architecture' },
-      { name: 'Authentication', level: 'Security' },
+      'PHP',
+      'Laravel',
+      'Eloquent ORM',
+      'RESTful APIs',
+      'Middleware & Auth',
+      'Livewire',
     ],
   },
   {
     id: 'database',
     category: 'Database & Storage',
-    iconName: 'Database',
-    description: 'Relational data structures, query design, and constraints.',
+    summary: 'Relational schema design, normalization, and data consistency.',
     skills: [
-      { name: 'MySQL', level: 'RDBMS' },
-      { name: 'SQL Queries', level: 'Data Querying' },
-      { name: 'Relational Schema', level: 'Data Modeling' },
-      { name: 'Database Normalization', level: 'Integrity' },
-    ],
-  },
-  {
-    id: 'frontend',
-    category: 'Frontend Basics',
-    iconName: 'Layout',
-    description: 'UI integration, responsive templating, and asynchronous requests.',
-    skills: [
-      { name: 'HTML5 / CSS3', level: 'Markup & Styling' },
-      { name: 'JavaScript (ES6+)', level: 'Client Scripting' },
-      { name: 'Tailwind CSS', level: 'Utility Styling' },
-      { name: 'React', level: 'Component UI' },
+      'MySQL',
+      'SQL Queries & Joins',
+      'Relational Schemas (3NF)',
+      'Foreign Keys & Constraints',
+      'Indexing Basics',
     ],
   },
   {
     id: 'tools',
     category: 'Tools & Workflow',
-    iconName: 'Terminal',
-    description: 'Version control, developer environment, and build pipelines.',
+    summary: 'Version control, developer workspace, and terminal environments.',
     skills: [
-      { name: 'Git', level: 'Version Control' },
-      { name: 'GitHub', level: 'Collaboration' },
-      { name: 'VS Code', level: 'Development IDE' },
-      { name: 'Postman / Bruno', level: 'API Testing' },
+      'Git',
+      'GitHub',
+      'Linux CLI',
+      'VS Code',
+      'Vite',
     ],
+  },
+  {
+    id: 'frontend',
+    category: 'Frontend Fundamentals',
+    summary: 'Client views, responsive styling, and basic component interfaces.',
+    skills: [
+      'Blade Templates',
+      'Tailwind CSS',
+      'JavaScript (ES6+)',
+      'HTML5 / Semantic HTML',
+      'React Fundamentals',
+    ],
+  },
+]
+
+/**
+ * Currently Exploring
+ * Technical concepts and technologies actively being studied
+ * to deepen backend architecture capabilities.
+ */
+export const currentlyExploring = [
+  {
+    id: 'token-auth',
+    topic: 'API Token Authentication (Sanctum / JWT)',
+    category: 'Backend Security',
+    context: 'Stateless bearer tokens for decoupled clients and mobile APIs.',
+  },
+  {
+    id: 'payment-webhooks',
+    topic: 'Payment Gateway Webhooks',
+    category: 'Transaction Architecture',
+    context: 'Idempotent webhook payload verification and state reconciliation.',
+  },
+  {
+    id: 'clean-architecture',
+    topic: 'Clean Architecture & Repositories',
+    category: 'System Design',
+    context: 'Decoupled domain business logic and repository pattern contracts.',
+  },
+]
+
+/**
+ * Editorial Technical Skills List
+ * Matching the exact two-column table design from Signal-A & Figma spec:
+ * - Left: Bold Sans-Serif Title (Skill / Technology name)
+ * - Right: Monospace Uppercase Metadata (Scope / Core capabilities)
+ * Refined to 10 authentic, applied skills focused on Laravel backend development.
+ */
+export const technicalSkillsList = [
+  {
+    id: 'php',
+    name: 'PHP',
+    detail: 'OBJECT-ORIENTED PROGRAMMING',
+    category: 'Backend programming language',
+    status: 'applied',
+  },
+  {
+    id: 'laravel',
+    name: 'LARAVEL',
+    detail: 'MVC · ELOQUENT ORM · MIGRATIONS',
+    category: 'Backend web development',
+    status: 'applied',
+  },
+  {
+    id: 'mysql',
+    name: 'MYSQL',
+    detail: 'SQL · RELATIONSHIPS · INDEXING',
+    category: 'Relational database',
+    status: 'applied',
+  },
+  {
+    id: 'rest-apis',
+    name: 'REST APIS',
+    detail: 'HTTP · JSON · API ENDPOINTS',
+    category: 'API development',
+    status: 'applied',
+  },
+  {
+    id: 'database-design',
+    name: 'DATABASE DESIGN',
+    detail: 'RELATIONSHIPS · NORMALIZATION',
+    category: 'Data modeling',
+    status: 'applied',
+  },
+  {
+    id: 'auth',
+    name: 'AUTH & RBAC',
+    detail: 'AUTHENTICATION · ROLES · POLICIES',
+    category: 'User access and security',
+    status: 'applied',
+  },
+  {
+    id: 'git-github',
+    name: 'GIT & GITHUB',
+    detail: 'VERSION CONTROL · COLLABORATION',
+    category: 'Version control',
+    status: 'applied',
+  },
+  {
+    id: 'blade-tailwind',
+    name: 'BLADE & TAILWIND',
+    detail: 'SERVER-RENDERED UI · RESPONSIVE DESIGN',
+    category: 'Frontend for Laravel applications',
+    status: 'applied',
+  },
+  {
+    id: 'livewire',
+    name: 'LIVEWIRE',
+    detail: 'DYNAMIC COMPONENTS · SERVER-SIDE STATE',
+    category: 'Reactive Laravel interfaces',
+    status: 'applied',
+  },
+  {
+    id: 'linux-cli',
+    name: 'LINUX & CLI',
+    detail: 'SHELL · TERMINAL WORKFLOWS',
+    category: 'Development environment',
+    status: 'applied',
   },
 ]

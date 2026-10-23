@@ -1,77 +1,161 @@
+import { useState, useEffect, useRef } from 'react'
 import Container from '../components/Container'
-import SectionHeading from '../components/SectionHeading'
-import { skillCategories } from '../data/skills'
-import { Server, Database, Layout, Terminal, Layers } from 'lucide-react'
+import { technicalSkillsList } from '../data/skills'
 
-// Icon resolver for skill categories
-const categoryIcons = {
-  Server: Server,
-  Database: Database,
-  Layout: Layout,
-  Terminal: Terminal,
+const GLYPHS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*+-=[]{}|;:<>'
+
+/**
+ * ScrambleText Component:
+ * - Starts fully visible (in-place scramble, does not start from empty).
+ * - When hovered, randomizes characters briefly (~340ms) and locks back cleanly to text.
+ * - Strictly scoped to the hovered row only.
+ */
+function ScrambleText({ text, isHovered, className = '' }) {
+  const [displayText, setDisplayText] = useState(text)
+  const [prevText, setPrevText] = useState(text)
+  const animRef = useRef(null)
+  const prevHoveredRef = useRef(isHovered)
+
+  if (text !== prevText) {
+    setPrevText(text)
+    setDisplayText(text)
+  }
+
+  useEffect(() => {
+    return () => {
+      if (animRef.current) cancelAnimationFrame(animRef.current)
+    }
+  }, [])
+
+  useEffect(() => {
+    if (isHovered && !prevHoveredRef.current) {
+      if (animRef.current) cancelAnimationFrame(animRef.current)
+
+      const startTime = performance.now()
+      const length = text.length
+      const DURATION_MS = 340
+
+      const step = (now) => {
+        const elapsed = now - startTime
+        if (elapsed >= DURATION_MS) {
+          setDisplayText(text)
+          animRef.current = null
+          return
+        }
+
+        const progress = elapsed / DURATION_MS
+        const lockThreshold =
+          progress < 0.25 ? 0 : Math.floor(((progress - 0.25) / 0.75) * length)
+
+        const scrambled = text
+          .split('')
+          .map((char, i) => {
+            if (
+              char === ' ' ||
+              char === '/' ||
+              char === '·' ||
+              char === ':' ||
+              char === '[' ||
+              char === ']' ||
+              char === '-' ||
+              char === '+' ||
+              char === '&' ||
+              char === '(' ||
+              char === ')'
+            ) {
+              return char
+            }
+            if (i < lockThreshold) return text[i]
+            return GLYPHS[Math.floor(Math.random() * GLYPHS.length)]
+          })
+          .join('')
+
+        setDisplayText(scrambled)
+        animRef.current = requestAnimationFrame(step)
+      }
+
+      animRef.current = requestAnimationFrame(step)
+    } else if (!isHovered && prevHoveredRef.current) {
+      if (animRef.current) {
+        cancelAnimationFrame(animRef.current)
+        animRef.current = null
+      }
+      setDisplayText(text)
+    }
+
+    prevHoveredRef.current = isHovered
+  }, [isHovered, text])
+
+  return <span className={className}>{displayText}</span>
 }
 
 /**
- * Skills Section ("TECHNICAL SKILLS"):
- * Responsive 4-column card grid displaying categorized technical capabilities without arbitrary percentages.
+ * Editorial Skills & Technologies Section
+ * Designed to match the exact Swiss typographic layout from the example image:
+ * - Two-column asymmetric layout (642px left / 642px right on desktop)
+ * - Left column: "SKILLS & TECHNOLOGIES" in monospace uppercase at top, clean whitespace below
+ * - Right column: Full-width table with border-t and border-b per row:
+ *   - Left: Bold sans uppercase title (e.g. PHP, LARAVEL, RESTFUL APIS)
+ *   - Right: Monospace uppercase scope/status (e.g. BACKEND RUNTIME · PHP 8.2+)
  */
 export default function Skills() {
+  const [hoveredId, setHoveredId] = useState(null)
+
   return (
     <section
       id="skills"
-      className="scroll-mt-16 py-16 sm:py-24 bg-white border-b border-neutral-100"
+      aria-labelledby="skills-heading"
+      className="relative scroll-mt-20 pt-16 sm:pt-24 lg:pt-36 pb-16 sm:pb-24 lg:pb-36 bg-white"
     >
       <Container>
-        <SectionHeading
-          title="Technical Skills"
-          description="Tools, frameworks, and databases utilized in building robust web applications and backend systems."
-        />
+        {/* Two-Column Grid matching Signal-A & Figma spec: 642px + 20px gap + 642px */}
+        <div className="w-full border-t border-black flex flex-col lg:flex-row justify-between items-start gap-4 lg:gap-[20px]">
+          {/* Left Column (Figma width: 642px): Aligned with row 1 under the unified top line */}
+          <div className="w-full lg:w-[642px] shrink-0 min-h-[33px] sm:min-h-[50px] lg:h-[54px] flex items-center">
+            <h2
+              id="skills-heading"
+              className="font-mono text-[10px] sm:text-[12px] uppercase tracking-wider text-black select-none"
+            >
+              SKILLS &amp; TECHNOLOGIES
+            </h2>
+          </div>
 
-        {/* 4-Column Responsive Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {skillCategories.map((cat) => {
-            const IconComp = categoryIcons[cat.iconName] || Layers
+          {/* Right Column (Figma width: 642px): Clean ruled table starting on row 1 directly under top line */}
+          <div className="w-full lg:w-[642px] flex flex-col shrink-0">
+            {technicalSkillsList.map((skill) => {
+              const isHovered = hoveredId === skill.id
 
-            return (
-              <div
-                key={cat.id}
-                className="flex flex-col bg-white border border-neutral-200 p-5 sm:p-6 rounded-xs transition-colors duration-150 hover:border-neutral-400"
+              return (
+                <div
+                  key={skill.id}
+                  onMouseEnter={() => setHoveredId(skill.id)}
+                  onMouseLeave={() => setHoveredId(null)}
+                  className="group w-full h-[33px] sm:h-[45px] lg:h-[54px] border-b border-black flex items-center justify-between gap-3 px-0 sm:px-2 select-none hover:bg-[#fafafa] transition-colors"
+                >
+                  {/* Left: Bold Title matching example screenshot */}
+                  <span className="font-mono sm:font-sans font-medium sm:font-bold text-[10px] sm:text-[15px] lg:text-[17px] tracking-tight uppercase text-black transition-all truncate pr-2">
+                    {skill.name}
+                  </span>
+
+                  {/* Right: Monospace Uppercase Metadata matching example screenshot */}
+                  <span className="font-mono text-[10px] sm:text-[11px] lg:text-[12px] uppercase tracking-wider text-neutral-500 sm:text-neutral-800 group-hover:text-black text-right shrink-0">
+                    <ScrambleText text={skill.detail} isHovered={isHovered} />
+                  </span>
+                </div>
+              )
+            })}
+
+            {/* Bottom Link matching Signal-A spec (height: 55px, border-b): ABOUT THE DEVELOPER / RESUME */}
+            <div className="w-full border-b border-black">
+              <a
+                href="#/resume"
+                className="w-full h-[55px] flex items-center justify-between font-mono text-[11px] sm:text-[12px] uppercase tracking-wider text-black hover:opacity-60 transition-opacity"
               >
-                {/* Category Header with Icon */}
-                <div className="flex items-center gap-3 mb-4">
-                  <div className="w-10 h-10 rounded-xs bg-neutral-100 border border-neutral-200 flex items-center justify-center text-neutral-900 shrink-0">
-                    <IconComp className="w-5 h-5 stroke-[1.75]" aria-hidden="true" />
-                  </div>
-                  <div>
-                    <h3 className="text-xs sm:text-sm font-extrabold uppercase tracking-wider text-neutral-900">
-                      {cat.category}
-                    </h3>
-                  </div>
-                </div>
-
-                <p className="text-xs text-neutral-500 mb-5 leading-relaxed">
-                  {cat.description}
-                </p>
-
-                {/* Skill Items List */}
-                <div className="mt-auto space-y-2">
-                  {cat.skills.map((skill, sIdx) => (
-                    <div
-                      key={`${cat.id}-item-${sIdx}`}
-                      className="flex items-center justify-between py-1.5 px-2.5 bg-neutral-50 border border-neutral-200/60 rounded-xs text-xs"
-                    >
-                      <span className="font-semibold text-neutral-800">
-                        {skill.name}
-                      </span>
-                      <span className="text-[10px] font-medium text-neutral-500 uppercase tracking-wider">
-                        {skill.level}
-                      </span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            )
-          })}
+                <span>CURRICULUM VITAE / RESUME</span>
+                <span className="text-sm font-sans">→</span>
+              </a>
+            </div>
+          </div>
         </div>
       </Container>
     </section>

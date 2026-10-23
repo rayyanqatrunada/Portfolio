@@ -1,6 +1,6 @@
 /**
- * SectionHeading component matching the visual reference:
- * Bold heading, optional eyebrow/description, and signature short horizontal accent line.
+ * Minimalist SectionHeading Component matching design reference:
+ * Bold heading with signature short black horizontal bar directly beneath.
  */
 export default function SectionHeading({
   title,
@@ -19,7 +19,7 @@ export default function SectionHeading({
       } ${className}`}
     >
       {eyebrow && (
-        <p className="mb-2 text-xs font-semibold tracking-wider text-neutral-500 uppercase">
+        <p className="mb-2 text-xs font-mono font-medium tracking-[0.2em] text-neutral-500 uppercase">
           {eyebrow}
         </p>
       )}
@@ -28,9 +28,9 @@ export default function SectionHeading({
         {title}
       </HeadingTag>
 
-      {/* Decorative short horizontal line directly beneath the heading */}
+      {/* Signature solid short black line under heading */}
       <div
-        className={`mt-2.5 h-[2px] w-12 bg-neutral-900 ${
+        className={`w-14 h-[2.5px] bg-black mt-2.5 ${
           isCenter ? 'mx-auto' : ''
         }`}
         aria-hidden="true"
@@ -38,7 +38,7 @@ export default function SectionHeading({
 
       {description && (
         <p
-          className={`mt-4 text-sm sm:text-base text-neutral-600 max-w-2xl ${
+          className={`mt-4 text-xs sm:text-sm text-neutral-600 max-w-xl leading-relaxed ${
             isCenter ? 'mx-auto' : ''
           }`}
         >

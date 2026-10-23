@@ -1,67 +1,226 @@
 @import "tailwindcss";
 
 @theme {
-  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-  --color-bg-primary: #ffffff;
-  --color-bg-secondary: #f0f0f0;
-  --color-surface-placeholder: #d6d6d6;
-  --color-text-primary: #171717;
-  --color-text-secondary: #666666;
-  --color-border-subtle: #e5e5e5;
+  --font-serif: 'Instrument Serif', Georgia, 'Times New Roman', serif;
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'JetBrains Mono', 'GT America Mono', 'Courier New', monospace;
+
+  /* Editorial Monochrome Foundation (Signal-A Inspired) */
+  --color-canvas: #ffffff;
+  --color-canvas-bg: #ffffff;
+  --color-canvas-alt: #f7f7f7;
+  --color-card-bg: #f7f7f7;
+  --color-surface-muted: #ededed;
+  --color-surface-raised: #f2f2f2;
+
+  --color-ink: #000000;
+  --color-ink-secondary: #333333;
+  --color-ink-muted: #595959;
+  --color-text-primary: #000000;
+  --color-text-secondary: #595959;
+  --color-text-muted: #737373;
+
+  --color-border-subtle: #e0e0e0;
+  --color-border-medium: #d0d0d0;
+  --color-border-dark: #000000;
+  --color-focus: #3898ec;
 }
 
 :root {
-  --bg-primary: #ffffff;
-  --bg-secondary: #f0f0f0;
-  --surface-placeholder: #d6d6d6;
-  --text-primary: #171717;
-  --text-secondary: #666666;
-  --border-subtle: #e5e5e5;
-  --container-max-width: 1140px;
+  --container-max-width: 1360px;
 }
 
 html {
   box-sizing: border-box;
   scroll-behavior: smooth;
+  color-scheme: light;
+  background-color: #ffffff;
 }
 
 *, *::before, *::after {
   box-sizing: inherit;
+  border-radius: 0 !important; /* Strict sharp corners as specified in Signal-A design system */
+}
+
+/* Minimalist Editorial Scrollbar (Chrome, Safari, Edge, WebKit) */
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #000000;
+  border-radius: 0 !important;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #333333;
+}
+
+::-webkit-scrollbar-corner {
+  background: transparent;
+}
+
+/* Modern Standards (Firefox & standards-compliant engines) */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #000000 transparent;
 }
 
 body {
   margin: 0;
   padding: 0;
-  background-color: var(--bg-primary);
-  color: var(--text-primary);
+  background-color: #ffffff;
+  color: #000000;
   font-family: var(--font-sans);
-  line-height: 1.6;
+  line-height: 1.5;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+  position: relative;
 }
 
-/* Accessible focus visible indicators */
+/* Sharp high-contrast focus indicators */
 :focus-visible {
-  outline: 2px solid var(--text-primary);
+  outline: 1.5px solid #000000;
   outline-offset: 2px;
 }
 
-/* Clean monochrome selection style */
+/* Crisp monochrome selection */
 ::selection {
-  background-color: var(--text-primary);
+  background-color: #000000;
   color: #ffffff;
 }
 
-/* Respect user's reduced motion preferences */
+/* Section separators */
+.rule-hairline {
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.rule-hairline-dark {
+  border-bottom: 1px solid #000000;
+}
+
+/* Fine underline reveal on hover */
+.editorial-link {
+  position: relative;
+  display: inline-block;
+  text-decoration: none;
+}
+.editorial-link::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 1px;
+  bottom: 0;
+  left: 0;
+  background-color: currentColor;
+  transform: scaleX(0);
+  transform-origin: bottom right;
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.editorial-link:hover::after {
+  transform: scaleX(1);
+  transform-origin: bottom left;
+}
+
+/* Subtle arrow movements on hover */
+.group:hover .editorial-arrow-diag {
+  transform: translate(2px, -2px);
+}
+.group:hover .editorial-arrow-up {
+  transform: translateY(-2px);
+}
+.group:hover .editorial-arrow-right {
+  transform: translateX(2px);
+}
+.group:hover .editorial-arrow-down {
+  transform: translateY(2px);
+}
+
+.editorial-arrow-diag,
+.editorial-arrow-up,
+.editorial-arrow-right,
+.editorial-arrow-down {
+  transition: transform 0.18s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Short subtle entrance transitions */
+@keyframes editorialFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.editorial-enter {
+  animation: editorialFadeIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Continuous Running Marquee (Signal-A Footer Spec) */
+@keyframes marqueeContinuous {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee,
+.animate-marquee:hover {
+  display: flex;
+  width: max-content;
+  animation: marqueeContinuous 30s linear infinite;
+  animation-play-state: running !important;
+  will-change: transform;
+}
+
+/* Reduced motion accessibility */
 @media (prefers-reduced-motion: reduce) {
   html {
-    scroll-behavior: auto;
+    scroll-behavior: auto !important;
   }
-
-  *, *::before, *::after {
+  *,
+  *::before,
+  *::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
+    transform: none !important;
+  }
+}
+
+/* Print optimization for Resume and Editorial documents */
+@media print {
+  header,
+  footer,
+  .no-print {
+    display: none !important;
+  }
+
+  body {
+    background-color: #ffffff !important;
+    color: #000000 !important;
+  }
+
+  article,
+  section {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  @page {
+    margin: 12mm 15mm;
+    size: A4 portrait;
   }
 }

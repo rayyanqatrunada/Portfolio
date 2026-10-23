@@ -1,135 +1,198 @@
-# Rayy — Backend Developer Portfolio
+# RAYY.DEV — Backend Developer Portfolio
 
-Website personal portfolio untuk Backend Developer, dirancang dengan komposisi minimalis, tipografi tegas monokrom, dan performa tinggi menggunakan React, Vite, dan Tailwind CSS v4.
+A sleek, high-contrast, minimalist personal portfolio engineered to showcase backend development competencies, database architecture, and RESTful API design.
 
----
-
-## 🛠️ Teknologi & Stack
-
-- **UI Framework**: [React](https://react.dev/) 19 (JavaScript & JSX)
-- **Bundler & Dev Server**: [Vite](https://vite.dev/) 8
-- **Styling**: [Tailwind CSS](https://tailwindcss.com/) v4 (via plugin resmi `@tailwindcss/vite`)
-- **Icons**: [Lucide React](https://lucide.dev/) & Ikon Brand SVG lokal
-- **Linter**: [Oxlint](https://oxc.rs/)
+Built with **React 19**, **Vite 8**, **Tailwind CSS v4**, and **Lucide React**, following a strictly data-driven architecture and a modern monochrome design system.
 
 ---
 
-## 🧭 Struktur Section yang Tersedia
+## 📌 Project Overview
 
-1. **Navbar** (`#home`): Header sticky dengan background `#F0F0F0`, logo `RAYY.DEV`, link navigasi uppercase, dan drawer mobile menu responsif (teruji keyboard accessible & tombol Escape).
-2. **Hero** (`#home`): Layout dua kolom di desktop dengan sapaan, headline, pill badge peran, deskripsi ringkas, tombol aksi, serta frame visual arsitektural minimalis beraksen garis offset.
-3. **Services** (`#services`): Bagian "What I Do" menampilkan 3 kartu backend (*Backend Development*, *API Development*, *Database Design*) dengan ikon teknis dan visual surface `#D6D6D6`.
-4. **About** (`#about`): Layout dua kolom dengan frame visual di kiri serta biografi profesional dan 3 checklist fokus kompetensi di kanan.
-5. **Technical Skills** (`#skills`): Grid responsif 4 kolom yang mengelompokkan keterampilan ke dalam *Backend Development*, *Database & Storage*, *Frontend Basics*, dan *Tools & Workflow* tanpa progress bar atau rating semu.
-6. **Featured Projects** (`#projects`): Grid responsif 2 kolom yang menampilkan 4 proyek nyata (*Compify*, *TSM Department Portal*, *PMart*, dan *RESTful Inventory & Order Service*) dengan skematik SVG beresolusi tinggi, tag teknologi monokrom, dan status tautan jujur.
-7. **Contact & CTA** (`#contact`): Banner ajakan kolaborasi berlatar abu-abu `#F0F0F0` diikuti kanal kontak langsung (*Direct Email*, *GitHub*, *LinkedIn*) dengan validasi pencegah tautan placeholder aktif.
-8. **Footer**: Penutup halaman dengan identitas brand, navigasi ringkas, copyright dinamis, dan tautan sosial terverifikasi.
+**RAYY.DEV** is the personal portfolio of **Rayyan Qatrunada (Rayy)**, a backend developer specializing in PHP, Laravel, relational database modeling (MySQL/3NF), and RESTful API architecture.
+
+Unlike generic developer showcases, this portfolio highlights engineering depth rather than superficial UI flair:
+- **Architecture & System Design**: Dedicated modal deep-dives highlighting database schemas, query optimization, and architectural decisions.
+- **Honest & Verifiable Data**: Zero fake metrics, no broken dead links (`href="#"`), and no placeholder credentials.
+- **Strict Monochrome Aesthetics**: High-contrast, clean typography, dark surfaces, and responsive layouts designed for clarity and legibility.
 
 ---
 
-## 📁 Struktur Direktori
+## ✨ Features
+
+- **Interactive Terminal Hero (`HeroTerminal`)**:
+  - Client-side static terminal simulation demonstrating shell profiles (`profile.sh`), normalized database schemas (`schema.sql`), and RESTful JSON responses (`api.json`).
+  - Supports keyboard navigation (`Enter`, `Space`), tab switching, and one-click code copying with visual feedback.
+- **Engineering Deep-Dive Modals (`ProjectDetailModal`)**:
+  - Accessible technical breakdowns for featured projects (Compify, TSM Portal, PMart, Inventory & Order Service).
+  - 5 structured inspection tabs per project: **Overview**, **Architecture**, **Relational Schema (3NF)**, **Technical Decisions**, and **Backend Features**.
+- **Competency-Driven Skills Organization**:
+  - Skills structured by actual backend competency rather than arbitrary progress percentages: *Backend Development*, *Database & Storage*, *API Development & Testing*, *Tools & Workflow*, and *Frontend Fundamentals*.
+  - **Currently Exploring**: Dedicated research tracker displaying ongoing explorations (e.g., Laravel Sanctum/JWT, Webhook architectures).
+- **Accessible & Reliable Copy Email**:
+  - Interactive email copy button using the Clipboard API with legacy `execCommand` fallback.
+  - Screen-reader friendly with `aria-live="polite"` feedback announcements.
+- **Honest Asset & Link Management**:
+  - Conditional CV handling displaying an honest *"Awaiting File"* badge instead of a dead 404 download link.
+  - LinkedIn profile labeled as *"Available Upon Request"* pending public URL configuration.
+- **Comprehensive Viewport Responsiveness**:
+  - Tested across screens from 320px mobile to 1440px desktop with zero unintended horizontal overflow.
+  - Accessible keyboard focus rings (`focus-visible`) and WCAG AAA contrast compliance.
+
+---
+
+## 🛠️ Tech Stack
+
+| Layer | Technology | Version | Purpose |
+| :--- | :--- | :--- | :--- |
+| **Framework** | [React](https://react.dev/) | `^19.2.8` | Core UI component hierarchy |
+| **Tooling & Bundler** | [Vite](https://vite.dev/) | `^8.3.0` | Ultra-fast HMR and production bundling |
+| **Styling** | [Tailwind CSS](https://tailwindcss.com/) | `^4.3.3` | Utility-first styling via `@tailwindcss/vite` |
+| **Icons** | [Lucide React](https://lucide.dev/) | `^1.57.0` | High-consistency SVG interface icons |
+| **Linter** | [Oxlint](https://oxc.rs/) | `^1.81.0` | High-performance Rust-based static code analysis |
+
+---
+
+## 📁 Project Structure
 
 ```text
-portfolio/
-├── public/                 # Favicon brand monokrom (favicon.svg)
+Portfolio/
+├── public/
+│   ├── favicon.svg             # Minimalist monochrome brand favicon
+│   └── resume.pdf              # (Optional) Place CV PDF here to enable download
 ├── src/
 │   ├── assets/
-│   │   └── projects/       # Aset ilustrasi skematik teknis proyek (SVG)
-│   ├── components/         # Komponen reusable (Container, SectionHeading, Button, ProjectCard, SocialIcons)
+│   │   └── projects/           # Technical vector schematic illustrations (SVG)
+│   ├── components/
+│   │   ├── Button.jsx          # Reusable styled button component
+│   │   ├── Container.jsx       # Standard max-width layout wrapper
+│   │   ├── CopyEmailButton.jsx # Accessible clipboard interaction with live feedback
+│   │   ├── Footer.jsx          # Semantic footer with social links & copyright
+│   │   ├── HeroTerminal.jsx    # Interactive 3-tab static terminal simulation
+│   │   ├── Navbar.jsx          # Sticky header with mobile drawer navigation
+│   │   ├── ProjectCard.jsx     # Card component with deep-dive modal trigger
+│   │   ├── ProjectDetailModal.jsx # 5-tab architectural deep-dive dialog
+│   │   └── SectionHeading.jsx  # Consistent section title & subtitle presenter
 │   ├── data/
-│   │   ├── portfolioData.js # Sumber data terpusat (profil, bio, navbar, CTA, kontak)
-│   │   ├── projects.js      # Data proyek featured (judul, deskripsi, teknologi, link)
-│   │   └── skills.js        # Data kategori keterampilan teknis
-│   ├── sections/           # Modul section halaman (Hero, Services, About, Skills, Projects, Contact, Footer)
-│   ├── App.jsx             # Komposisi halaman utama
-│   ├── index.css           # Global stylesheet & token tema Tailwind v4 (@theme)
-│   └── main.jsx            # Entry point aplikasi React
-├── index.html              # Shell HTML, metadata SEO, Open Graph & preconnect fonts
-├── package.json            # Daftar dependencies & scripts
-├── vite.config.js          # Konfigurasi Vite & plugin Tailwind v4
-└── README.md               # Dokumentasi project
+│   │   ├── portfolioData.js    # Centralized developer identity, contact & metadata
+│   │   ├── projectDetails.js   # In-depth architectural & schema data for modals
+│   │   ├── projects.js         # Featured projects list & repository links
+│   │   └── skills.js           # Skills categorized by technical competency
+│   ├── sections/
+│   │   ├── About.jsx           # Developer bio and architectural principles
+│   │   ├── Contact.jsx         # Contact banner with direct communication channels
+│   │   ├── Hero.jsx            # Headline, elevator pitch, and terminal preview
+│   │   ├── Projects.jsx        # Project gallery grid
+│   │   ├── Services.jsx        # Core backend offerings breakdown
+│   │   └── Skills.jsx          # Grouped technical competencies & ongoing research
+│   ├── App.jsx                 # Main application page layout
+│   ├── index.css               # Tailwind v4 `@theme` configuration & global styles
+│   └── main.jsx                # React DOM root entry point
+├── index.html                  # HTML entry with Open Graph & SEO meta tags
+├── package.json                # Project dependencies, metadata, and run scripts
+├── vite.config.js              # Vite configuration with React & Tailwind plugins
+└── README.md                   # Project documentation
 ```
 
 ---
 
-## 📋 Prasyarat
+## 📥 Installation
 
-- **Node.js**: Versi `18.0.0` atau yang lebih baru.
-- **npm**: Versi `9.0.0` atau yang lebih baru.
+### Prerequisites
 
----
+Ensure you have the following installed on your system:
+- **Node.js**: `v18.0.0` or higher (Node 20+ recommended)
+- **npm**: `v9.0.0` or higher
 
-## 🚀 Perintah Development
+### Steps
 
-1. **Instalasi Dependencies**
+1. **Clone the repository**:
+   ```bash
+   git clone https://github.com/rayyanqatrunada/Portfolio.git
+   cd Portfolio
+   ```
+
+2. **Install project dependencies**:
    ```bash
    npm install
    ```
 
-2. **Menjalankan Development Server**
-   ```bash
-   npm run dev
-   ```
-   Aplikasi akan berjalan secara lokal di `http://localhost:5173/`.
+---
 
-3. **Memeriksa Kode (Linting)**
-   ```bash
-   npm run lint
-   ```
+## ⚡ Development Commands
 
-4. **Membuat Production Build**
-   ```bash
-   npm run build
-   ```
-   Hasil build yang dioptimalkan akan tersimpan di direktori `dist/`.
+All available scripts are defined in `package.json`:
 
-5. **Pratinjau Hasil Build Lokal**
-   ```bash
-   npm run preview
-   ```
+| Command | Action |
+| :--- | :--- |
+| `npm run dev` | Starts the local Vite development server with Hot Module Replacement (HMR) at `http://localhost:5173/`. |
+| `npm run lint` | Runs [Oxlint](https://oxc.rs/) to inspect all JavaScript/JSX files for bugs, anti-patterns, and unused code. |
+| `npm run build` | Compiles and optimizes assets into the production-ready `dist/` directory. |
+| `npm run preview` | Starts a local HTTP server to preview the production build output from `dist/`. |
 
 ---
 
-## ⚙️ Panduan Pengisian Data Profil & Proyek
+## 🏗️ Production Build
 
-Semua data telah dipisahkan secara terpusat agar mudah disesuaikan tanpa menyentuh kode UI:
+To generate an optimized client production bundle:
 
-1. **Data Profil & Kontak**: Edit file [`src/data/portfolioData.js`](src/data/portfolioData.js)
-   - `name`: Nama asli Anda.
-   - `logoText`: Teks logo navbar (misal: `RAYY.DEV`).
-   - `email`: Alamat email aktif (mengaktifkan tombol kontak `mailto:`).
-   - `githubUrl`: URL profil GitHub asli Anda.
-   - `linkedinUrl`: URL profil LinkedIn asli Anda.
+```bash
+npm run build
+```
 
-2. **Data Proyek**: Edit file [`src/data/projects.js`](src/data/projects.js)
-   - `liveUrl`: Masukkan URL live demo jika proyek sudah aktif.
-   - `repoUrl`: Masukkan URL repository GitHub jika sudah bersifat publik.
-   - *Catatan*: Jika `liveUrl` atau `repoUrl` bernilai `null`, sistem secara otomatis menampilkan label status yang jujur (*In Active Development*, *Internal Project*) tanpa membuat link palsu atau tombol rusak `href="#"`.
+The output will be placed in `dist/`:
+- **`dist/index.html`**: Minified HTML document containing preconnect links and SEO metadata.
+- **`dist/assets/*.css`**: Purged, vendor-prefixed, and minified CSS (~35 kB, ~6.8 kB gzip).
+- **`dist/assets/*.js`**: Code-split, tree-shaken JavaScript bundle (~305 kB, ~91 kB gzip).
+- **`dist/assets/*.svg`**: Vector project schematic assets.
+
+You can verify the production bundle locally prior to deployment by running:
+```bash
+npm run preview
+```
 
 ---
 
-## 🌐 Panduan Deployment ke Vercel (Hobby / Free)
+## ⚙️ Configuration & Customization
 
-Website ini adalah Single-Page Application (SPA) berbasis Vite statis dengan navigasi section anchor sehingga **tidak memerlukan konfigurasi `vercel.json` tambahan**.
+The codebase follows a strictly data-driven design. Update content without modifying UI component templates:
 
-### Langkah 1: Hubungkan ke GitHub
-1. Buat repository baru di [GitHub](https://github.com/new) (misal: `portfolio`).
-2. Jalankan perintah berikut di terminal lokal Anda:
-   ```bash
-   git remote add origin https://github.com/<USERNAME-ANDA>/<NAMA-REPO>.git
-   git branch -M main
-   git push -u origin main
-   ```
+1. **Profile, Bio & Contact Details**:
+   - Edit [`src/data/portfolioData.js`](src/data/portfolioData.js) to configure your name, bio, email address, GitHub URL, and LinkedIn URL.
+2. **Project Summaries & Repositories**:
+   - Edit [`src/data/projects.js`](src/data/projects.js) to manage project titles, taglines, tech badges, and live demo/repo links.
+3. **Engineering Deep-Dive Specifications**:
+   - Edit [`src/data/projectDetails.js`](src/data/projectDetails.js) to customize the 5-tab technical breakdowns, database schemas (DDL), architecture patterns, and decision logs.
+4. **Skills & Research Tracker**:
+   - Edit [`src/data/skills.js`](src/data/skills.js) to update technical categories or add items to the *Currently Exploring* section.
+5. **Resume / CV Integration**:
+   - Place a PDF named `resume.pdf` inside the `public/` directory and update `resumeUrl` in [`src/data/portfolioData.js`](src/data/portfolioData.js) to enable the download button.
 
-### Langkah 2: Deploy di Vercel
-1. Buka dan masuk ke [Vercel Dashboard](https://vercel.com/dashboard).
-2. Klik tombol **"Add New..."** lalu pilih **"Project"**.
-3. Pilih repository GitHub portfolio Anda yang telah di-push.
-4. Pada halaman konfigurasi project (*Configure Project*), pastikan pengaturan berikut terisi secara otomatis:
+---
+
+## 🌐 Deployment
+
+As a client-rendered Single-Page Application (SPA), **RAYY.DEV** can be hosted on any modern static hosting provider.
+
+### Vercel
+1. Push your repository to GitHub.
+2. Import the project in the [Vercel Dashboard](https://vercel.com/new).
+3. The Vite build presets will be detected automatically:
    - **Framework Preset**: `Vite`
-   - **Root Directory**: `./`
    - **Build Command**: `npm run build`
    - **Output Directory**: `dist`
-   - **Install Command**: `npm install`
-5. Klik **"Deploy"**.
-6. Tunggu proses build selesai (~1 menit), kemudian Vercel akan memberikan domain publik `https://<nama-project>.vercel.app`.
+4. Click **Deploy**.
+
+### Netlify
+1. Connect your GitHub repository on [Netlify](https://app.netlify.com/).
+2. Set the build settings:
+   - **Build Command**: `npm run build`
+   - **Publish Directory**: `dist`
+3. Click **Deploy Site**.
+
+---
+
+## 📄 License & Terms
+
+This repository contains the personal portfolio and project showcase of **Rayyan Qatrunada**.
+
+The source code is made publicly available for code review, inspection, and demonstration purposes. All rights to personal branding, written bio content, and project schematics are reserved by the author.

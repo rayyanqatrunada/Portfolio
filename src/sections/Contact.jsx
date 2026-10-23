@@ -1,146 +1,114 @@
 import Container from '../components/Container'
-import SectionHeading from '../components/SectionHeading'
-import Button from '../components/Button'
+import CopyEmailButton from '../components/CopyEmailButton'
 import { profileData, isRealEmail, isRealUrl } from '../data/portfolioData'
-import { GithubIcon, LinkedinIcon } from '../components/SocialIcons'
-import { Mail, ExternalLink } from 'lucide-react'
+import { GithubIcon } from '../components/SocialIcons'
+import { Mail, ArrowUpRight } from 'lucide-react'
 
 /**
- * Contact & CTA Section:
- * Features the signature light-gray CTA banner from reference visual,
- * followed by verified, honest contact channels (email, GitHub, LinkedIn).
+ * Phase 5 — Restrained Editorial Contact Section (Signal-A Inspired)
+ * - Clear "CONTACT" label and index
+ * - Large concise invitation
+ * - One short supporting sentence
+ * - Real email action & functional copy button
+ * - Real GitHub link
+ * - Monochrome layout with thin structural separators
+ * - No fake accounts or availability claims
  */
 export default function Contact() {
   const emailValid = isRealEmail(profileData.email)
   const githubValid = isRealUrl(profileData.githubUrl)
-  const linkedinValid = isRealUrl(profileData.linkedinUrl)
 
   return (
-    <section id="contact" className="scroll-mt-16 bg-white">
-      {/* 1. Signature CTA Banner matching the reference visual */}
-      <div className="bg-[#F0F0F0] border-y border-neutral-200 py-14 sm:py-20">
-        <Container className="text-center">
-          <h2 className="text-xl sm:text-2xl md:text-3xl font-black uppercase tracking-tight text-neutral-900 max-w-2xl mx-auto leading-tight">
-            {profileData.ctaHeading}
-          </h2>
-          <p className="mt-4 text-xs sm:text-sm text-neutral-600 max-w-lg mx-auto leading-relaxed">
-            {profileData.ctaDescription}
-          </p>
-          <div className="mt-8 flex flex-wrap justify-center gap-4">
-            {emailValid ? (
-              <Button href={`mailto:${profileData.email}`} variant="primary">
-                Contact Me
-              </Button>
-            ) : (
-              <Button href="#contact-channels" variant="primary">
-                Contact Channels
-              </Button>
-            )}
-            <Button href="#projects" variant="secondary">
-              View My Work
-            </Button>
+    <section
+      id="contact"
+      aria-labelledby="contact-heading"
+      className="relative scroll-mt-20 py-16 sm:py-24 bg-white border-b border-[#e0e0e0]"
+    >
+      <Container>
+        {/* Section Header */}
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 pb-6 border-b border-black mb-12 sm:mb-16">
+          <div>
+            <div className="font-mono text-xs text-neutral-500 uppercase tracking-widest mb-1.5">
+              [ 05 / INQUIRY ]
+            </div>
+            <h2
+              id="contact-heading"
+              className="font-serif text-3xl sm:text-5xl md:text-6xl text-black uppercase tracking-tight"
+            >
+              CONTACT
+            </h2>
           </div>
-        </Container>
-      </div>
 
-      {/* 2. Direct Contact Channels */}
-      <div id="contact-channels" className="py-16 sm:py-24 border-b border-neutral-100">
-        <Container>
-          <SectionHeading
-            title="Get In Touch"
-            description="Whether you have an inquiry regarding backend architecture, APIs, or data schemas, feel free to reach out."
-          />
+          <div className="flex flex-col md:items-end font-mono text-xs text-neutral-600 uppercase tracking-wider">
+            <span>DIRECT INQUIRIES</span>
+            <span className="text-neutral-400">JEPARA, ID [GMT+7]</span>
+          </div>
+        </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
-            {/* Email Channel */}
-            <div className="flex flex-col bg-white border border-neutral-200 p-6 rounded-xs transition-colors hover:border-neutral-400">
-              <div className="w-10 h-10 rounded-xs bg-neutral-100 border border-neutral-200 flex items-center justify-center text-neutral-900 mb-4">
-                <Mail className="w-5 h-5 stroke-[1.75]" aria-hidden="true" />
-              </div>
-              <h3 className="text-xs font-bold uppercase tracking-wider text-neutral-500 mb-1">
-                Direct Email
-              </h3>
-              {emailValid ? (
-                <a
-                  href={`mailto:${profileData.email}`}
-                  className="text-sm font-bold text-neutral-900 hover:text-neutral-600 underline-offset-4 hover:underline break-all"
-                >
-                  {profileData.email}
-                </a>
-              ) : (
-                <div className="flex flex-col gap-1">
-                  <span className="text-sm font-semibold text-neutral-800 break-all select-all">
+        {/* Editorial Invitation & Direct Action */}
+        <div className="max-w-4xl">
+          {/* Large concise invitation */}
+          <h3 className="font-serif text-3xl sm:text-5xl lg:text-6xl text-black tracking-tight leading-[1.08]">
+            LET’S DISCUSS BACKEND SYSTEMS &amp; NEW PROJECTS.
+          </h3>
+
+          {/* One short supporting sentence */}
+          <p className="mt-4 sm:mt-6 text-sm sm:text-base text-neutral-600 max-w-2xl leading-relaxed">
+            Whether you have an inquiry regarding database architecture, service boundaries, or potential project collaborations, feel free to reach out.
+          </p>
+
+          {/* Thin Separator & Verified Direct Actions */}
+          <div className="mt-10 pt-8 sm:mt-12 sm:pt-10 border-t border-[#e0e0e0]">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-6">
+              {/* Primary Email Link & Copy Action */}
+              <div className="flex flex-col sm:flex-row sm:items-center gap-4">
+                {emailValid ? (
+                  <a
+                    href={`mailto:${profileData.email}`}
+                    className="group inline-flex items-center gap-2.5 text-lg sm:text-2xl font-serif text-black hover:text-neutral-600 transition-colors focus-visible:outline-1 focus-visible:outline-black"
+                    aria-label={`Send direct email to ${profileData.email}`}
+                  >
+                    <Mail className="w-5 h-5 text-neutral-400 group-hover:text-black transition-colors shrink-0" aria-hidden="true" />
+                    <span className="editorial-link">{profileData.email}</span>
+                    <ArrowUpRight
+                      className="w-4 h-4 text-neutral-400 group-hover:text-black group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all shrink-0"
+                      aria-hidden="true"
+                    />
+                  </a>
+                ) : (
+                  <span className="text-base font-mono text-neutral-800">
                     {profileData.email}
                   </span>
-                  <span className="text-[11px] font-medium text-neutral-500 italic">
-                    (Placeholder — update in portfolioData.js)
-                  </span>
-                </div>
-              )}
-            </div>
+                )}
 
-            {/* GitHub Channel */}
-            <div className="flex flex-col bg-white border border-neutral-200 p-6 rounded-xs transition-colors hover:border-neutral-400">
-              <div className="w-10 h-10 rounded-xs bg-neutral-100 border border-neutral-200 flex items-center justify-center text-neutral-900 mb-4">
-                <GithubIcon className="w-5 h-5" />
+                {/* Real Copy Email button */}
+                {emailValid && (
+                  <CopyEmailButton email={profileData.email} size="sm" />
+                )}
               </div>
-              <h3 className="text-xs font-bold uppercase tracking-wider text-neutral-500 mb-1">
-                GitHub Repository
-              </h3>
-              {githubValid ? (
-                <a
-                  href={profileData.githubUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 text-sm font-bold text-neutral-900 hover:text-neutral-600 underline-offset-4 hover:underline break-all"
-                >
-                  View Profile
-                  <ExternalLink className="w-3.5 h-3.5 shrink-0" aria-hidden="true" />
-                </a>
-              ) : (
-                <div className="flex flex-col gap-1">
-                  <span className="text-sm font-semibold text-neutral-800 break-all">
-                    {profileData.githubUrl}
-                  </span>
-                  <span className="text-[11px] font-medium text-neutral-500 italic">
-                    (Placeholder — update in portfolioData.js)
-                  </span>
-                </div>
-              )}
-            </div>
 
-            {/* LinkedIn Channel */}
-            <div className="flex flex-col bg-white border border-neutral-200 p-6 rounded-xs transition-colors hover:border-neutral-400">
-              <div className="w-10 h-10 rounded-xs bg-neutral-100 border border-neutral-200 flex items-center justify-center text-neutral-900 mb-4">
-                <LinkedinIcon className="w-5 h-5" />
-              </div>
-              <h3 className="text-xs font-bold uppercase tracking-wider text-neutral-500 mb-1">
-                LinkedIn Network
-              </h3>
-              {linkedinValid ? (
-                <a
-                  href={profileData.linkedinUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 text-sm font-bold text-neutral-900 hover:text-neutral-600 underline-offset-4 hover:underline break-all"
-                >
-                  Connect Profile
-                  <ExternalLink className="w-3.5 h-3.5 shrink-0" aria-hidden="true" />
-                </a>
-              ) : (
-                <div className="flex flex-col gap-1">
-                  <span className="text-sm font-semibold text-neutral-800 break-all">
-                    {profileData.linkedinUrl}
-                  </span>
-                  <span className="text-[11px] font-medium text-neutral-500 italic">
-                    (Placeholder — update in portfolioData.js)
-                  </span>
+              {/* Real Verified GitHub Link */}
+              {githubValid && (
+                <div className="flex items-center">
+                  <a
+                    href={profileData.githubUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group inline-flex items-center gap-2 font-mono text-xs uppercase tracking-wider text-black border border-black px-4 py-2 hover:bg-black hover:text-white transition-colors duration-150 focus-visible:outline-1 focus-visible:outline-black"
+                  >
+                    <GithubIcon className="w-3.5 h-3.5" />
+                    <span>GITHUB PROFILE</span>
+                    <ArrowUpRight
+                      className="w-3.5 h-3.5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform"
+                      aria-hidden="true"
+                    />
+                  </a>
                 </div>
               )}
             </div>
           </div>
-        </Container>
-      </div>
+        </div>
+      </Container>
     </section>
   )
 }

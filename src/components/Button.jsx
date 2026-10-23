@@ -1,6 +1,6 @@
 /**
- * Reusable Button component with primary, secondary, and link variants.
- * Renders an anchor tag if `href` is provided, otherwise a semantic button tag.
+ * Reusable Button component with primary, secondary, dark, white, and link variants.
+ * Styled for the clean light wireframe aesthetic from the design reference.
  */
 export default function Button({
   children,
@@ -14,21 +14,27 @@ export default function Button({
   ...props
 }) {
   const baseStyles =
-    'inline-flex items-center justify-center font-semibold uppercase tracking-wider transition-colors duration-150 rounded-xs focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-neutral-900 disabled:opacity-50 disabled:pointer-events-none cursor-pointer'
+    'inline-flex items-center justify-center font-bold uppercase tracking-wider transition-all duration-150 rounded-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black disabled:opacity-50 disabled:pointer-events-none cursor-pointer'
 
   const sizes = {
-    sm: 'text-xs px-3.5 py-1.5',
-    md: 'text-xs sm:text-sm px-5 py-2.5',
-    lg: 'text-sm px-6 py-3',
+    sm: 'text-[11px] px-4 py-1.5',
+    md: 'text-xs px-6 py-2.5',
+    lg: 'text-xs sm:text-sm px-8 py-3',
   }
 
   const variants = {
     primary:
-      'bg-neutral-900 text-white border border-neutral-900 hover:bg-neutral-800 active:bg-neutral-950',
+      'bg-neutral-300 text-neutral-900 border border-neutral-400/80 hover:bg-neutral-400 active:bg-neutral-400',
     secondary:
-      'bg-white text-neutral-900 border border-neutral-300 hover:bg-neutral-100 active:bg-neutral-200',
+      'bg-neutral-200 text-neutral-900 border border-neutral-300 hover:bg-neutral-300 active:bg-neutral-400',
+    dark:
+      'bg-neutral-900 text-white border border-neutral-900 hover:bg-black active:bg-neutral-800',
+    white:
+      'bg-white text-neutral-900 border border-transparent hover:bg-neutral-100 active:bg-neutral-200 shadow-xs',
+    outline:
+      'bg-transparent text-neutral-900 border border-neutral-400 hover:bg-neutral-100 active:bg-neutral-200',
     link:
-      'bg-transparent text-neutral-900 hover:text-neutral-600 underline-offset-4 hover:underline p-0 border-transparent',
+      'bg-transparent text-neutral-600 hover:text-black underline-offset-4 hover:underline p-0 border-transparent',
   }
 
   const combinedClasses = `${baseStyles} ${
