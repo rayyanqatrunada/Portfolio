@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from 'react'
 import { profileData } from '../data/portfolioData'
+import { scrollToSection } from '../utils/scrollHelper'
 
 const GLYPHS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*+-=[]{}|;:<>'
 
@@ -268,33 +269,23 @@ export default function Navbar() {
 
   const handleLinkClick = (href, e) => {
     closeMenu()
+    const isCrossPage =
+      window.location.hash.includes('project') ||
+      window.location.hash.includes('resume')
+
     if (href === '#/resume' || href === '#resume') {
       if (e) e.preventDefault()
       window.location.hash = '#/resume'
-      window.scrollTo({ top: 0, behavior: 'smooth' })
       return
     }
+
     if (href.startsWith('#')) {
       const id = href.replace('#', '')
-      if (id === 'home') {
-        if (window.location.hash.includes('project') || window.location.hash.includes('resume')) {
-          window.location.hash = '#home'
-        } else {
-          if (e) e.preventDefault()
-          window.scrollTo({ top: 0, behavior: 'smooth' })
-        }
+      if (isCrossPage) {
+        window.location.hash = href
       } else {
-        if (window.location.hash.includes('project') || window.location.hash.includes('resume')) {
-          window.location.hash = href
-        } else {
-          const el = document.getElementById(id)
-          if (el) {
-            if (e) e.preventDefault()
-            el.scrollIntoView({ behavior: 'smooth' })
-          } else {
-            window.location.hash = href
-          }
-        }
+        if (e) e.preventDefault()
+        scrollToSection(id, 'smooth')
       }
     }
   }

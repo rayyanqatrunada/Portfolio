@@ -90,7 +90,7 @@ function useSequentialScramble(targetText, triggerKey, ticksPerChar = 2) {
 
 function ScrambleText({ text, triggerKey, ticksPerChar = 2, className = '' }) {
   const displayText = useSequentialScramble(text, triggerKey, ticksPerChar)
-  return <span className={className}>{displayText}</span>
+  return <span data-no-page-scramble="true" className={className}>{displayText}</span>
 }
 
 function getWibTimeString() {

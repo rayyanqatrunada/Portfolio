@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import Navbar from './components/Navbar'
 import Hero from './sections/Hero'
 import Projects from './sections/Projects'
@@ -8,159 +8,218 @@ import Skills from './sections/Skills'
 import Footer from './sections/Footer'
 import ProjectDetailPage from './components/ProjectDetailPage'
 import ResumePage from './components/ResumePage'
+import PixelTransitionOverlay from './components/PixelTransitionOverlay'
 import { projectsData } from './data/projects'
+import { usePageTransitionScramble } from './hooks/usePageTransitionScramble'
+import { scrollToSection } from './utils/scrollHelper'
+
+function parseRouteFromHash(hash) {
+  const cleanHash = typeof hash === 'string' ? hash : ''
+  if (cleanHash === '#/resume' || cleanHash === '#resume') {
+    return { type: 'resume', key: 'resume', project: null, targetSection: null }
+  }
+  const match = cleanHash.match(/^#\/?project\/([a-zA-Z0-9_-]+)/)
+  if (match) {
+    const project = projectsData.find((p) => p.id === match[1])
+    if (project) {
+      return { type: 'project', key: `project:${project.id}`, project, targetSection: null }
+    }
+  }
+  const sectionId = cleanHash.replace(/^#\/?/, '')
+  return {
+    type: 'home',
+    key: 'home',
+    project: null,
+    targetSection: sectionId && sectionId !== 'home' ? sectionId : 'home',
+  }
+}
 
 /**
  * Main Application Root (Signal-A & Figma Design Spec)
  *
- * Exact section sequence matching Figma coordinates and layout:
- * 1. Minimal Navigation (top: 0px)
- * 2. Editorial Hero (top status, 4-line display headline, submenu, excerpt & portrait)
- * 3. Case Studies (top: 1404px — 300px rows with randomized letter-by-letter hover reveal)
- * 4. Large Typographic Statement (top: 3875px — architectural manifesto with wireframe globe)
- * 5. Skills & Technologies (top: 4553px — two-column Swiss ruled table)
- * 6. Footer (top: 5259px — 4-column index & infinite running marquee)
+ * Integrated Page Transition Experience:
+ * 1. PixelTransitionOverlay: Random white squares rising from bottom to top, covering the screen.
+ *    Once 100% white, page route state swaps invisibly and scroll position is placed instantly
+ *    at the target destination without any visible scroll up or scroll down animation.
+ *    White curtain then dissolves with random squares rising from bottom to top.
+ * 2. usePageTransitionScramble: Lightweight text scramble targeting ONLY the destination section
+ *    (e.g. #projects or #home or #skills), keeping the page completely lightweight and lag-free.
  */
 function App() {
-  const [activeProject, setActiveProject] = useState(null)
-  const [isResume, setIsResume] = useState(false)
+  const [currentRoute, setCurrentRoute] = useState(() =>
+    parseRouteFromHash(typeof window !== 'undefined' ? window.location.hash : '')
+  )
+  const [isTransitioning, setIsTransitioning] = useState(false)
 
-  // Listen to hash changes for deep linking (e.g. #/project/compify or #/resume) & browser back button
-  useEffect(() => {
-    const syncRouteFromHash = () => {
-      const hash = window.location.hash
+  const pendingRouteRef = useRef(null)
+  const currentRouteRef = useRef(currentRoute)
+  currentRouteRef.current = currentRoute
+  const isTransitioningRef = useRef(false)
+  isTransitioningRef.current = isTransitioning
 
-      // 1. Resume page route
-      if (hash === '#/resume' || hash === '#resume') {
-        setIsResume(true)
-        setActiveProject(null)
-        window.scrollTo(0, 0)
-        document.title = 'Resume / CV — Rayyan Qatrunada | Backend Developer'
-        return
+  const currentPageKey = currentRoute.key
+  const currentTargetSection = currentRoute.targetSection
+
+  // Scramble text strictly on the destination section on page change
+  usePageTransitionScramble(currentPageKey, currentTargetSection)
+
+  const navigateToHash = (newHash) => {
+    if (window.location.hash === newHash) {
+      handleRouteIntent(newHash)
+    } else {
+      window.location.hash = newHash
+    }
+  }
+
+  const handleRouteIntent = (hash) => {
+    const nextRoute = parseRouteFromHash(hash)
+    const currentKey = currentRouteRef.current.key
+
+    // In-page anchor navigation (e.g. #skills or #statement while on Home page):
+    // Do NOT trigger transition overlay or page scramble! Just scroll smoothly with accurate navbar offset.
+    if (nextRoute.key === currentKey) {
+      if (nextRoute.targetSection) {
+        scrollToSection(nextRoute.targetSection, 'smooth')
       }
-      setIsResume(false)
-
-      // 2. Project detail route
-      const match = hash.match(/^#\/?project\/([a-zA-Z0-9_-]+)/)
-      if (match) {
-        const projectId = match[1]
-        const project = projectsData.find((p) => p.id === projectId)
-        if (project) {
-          setActiveProject(project)
-          window.scrollTo(0, 0)
-          document.title = `${project.displayTitle || project.title} — Rayyan Qatrunada Portfolio`
-          return
-        }
-      }
-      setActiveProject(null)
-      document.title = 'Rayyan Qatrunada — Portfolio | Backend Developer & Systems Architecture'
-
-      // Coming from a detail or resume page via a navbar/footer anchor (e.g. #skills):
-      // the target section only exists after the portfolio re-renders, so scroll afterwards.
-      const sectionId = hash.replace(/^#\/?/, '')
-      if (sectionId && sectionId !== 'resume' && !sectionId.startsWith('project/')) {
-        setTimeout(() => {
-          document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth' })
-        }, 50)
-      }
+      return
     }
 
-    syncRouteFromHash()
-    window.addEventListener('hashchange', syncRouteFromHash)
-    return () => window.removeEventListener('hashchange', syncRouteFromHash)
+    // Cross-page transition (Home ↔ Project Detail ↔ Resume):
+    pendingRouteRef.current = nextRoute
+    if (!isTransitioningRef.current) {
+      setIsTransitioning(true)
+    }
+  }
+
+  useEffect(() => {
+    const onHashChange = () => {
+      handleRouteIntent(window.location.hash)
+    }
+
+    window.addEventListener('hashchange', onHashChange)
+    return () => window.removeEventListener('hashchange', onHashChange)
   }, [])
 
+  const handleTransitionCovered = () => {
+    // Screen is now 100% covered in solid white
+    if (pendingRouteRef.current) {
+      const next = pendingRouteRef.current
+      setCurrentRoute(next)
+
+      // Position scroll INSTANTLY under the solid white curtain
+      // Eliminates visible scroll-up and scroll-down animations completely
+      const applyInstantPosition = () => {
+        if (next.type === 'home' && next.targetSection) {
+          scrollToSection(next.targetSection, 'instant')
+          return
+        }
+        window.scrollTo({ top: 0, left: 0, behavior: 'instant' })
+      }
+
+      applyInstantPosition()
+      requestAnimationFrame(applyInstantPosition)
+
+      if (next.type === 'resume') {
+        document.title = 'Resume / CV — Rayyan Qatrunada | Backend Developer'
+      } else if (next.type === 'project' && next.project) {
+        document.title = `${next.project.displayTitle || next.project.title} — Rayyan Qatrunada Portfolio`
+      } else {
+        document.title = 'Rayyan Qatrunada — Portfolio | Backend Developer & Systems Architecture'
+      }
+    }
+  }
+
+  const handleTransitionComplete = () => {
+    // Canvas has finished clearing from bottom to top
+    // The page is ALREADY at the destination section under the cover; NO post-uncover scroll animation!
+    setIsTransitioning(false)
+    pendingRouteRef.current = null
+  }
+
   const handleOpenProject = (project) => {
-    window.location.hash = `#/project/${project.id}`
-    setActiveProject(project)
-    window.scrollTo(0, 0)
+    navigateToHash(`#/project/${project.id}`)
   }
 
   const handleBackToPortfolio = () => {
-    window.location.hash = '#projects'
-    setActiveProject(null)
-    setTimeout(() => {
-      const el = document.getElementById('projects')
-      if (el) {
-        el.scrollIntoView({ behavior: 'smooth' })
-      }
-    }, 50)
+    navigateToHash('#projects')
   }
 
   const handleBackFromResume = () => {
-    window.location.hash = '#home'
-    setIsResume(false)
-    window.scrollTo({ top: 0, behavior: 'smooth' })
-  }
-
-  // When resume route is active, render the dedicated ResumePage with clean document framing
-  if (isResume) {
-    return (
-      <div className="min-h-screen bg-white text-black flex flex-col selection:bg-black selection:text-white">
-        <Navbar />
-        <main id="main-content" className="flex-1">
-          <ResumePage onBack={handleBackFromResume} />
-        </main>
-        <footer className="no-print border-t border-black py-6 bg-white text-black mt-auto">
-          <div className="mx-auto w-full max-w-[1736px] px-6 sm:px-8 flex flex-col sm:flex-row items-center justify-between gap-3 font-mono text-[11px] sm:text-[12px] uppercase tracking-wider text-neutral-500">
-            <span>RAYY.DEV · CURRICULUM VITAE SPECIFICATION</span>
-            <span>© {new Date().getFullYear()} RAYYAN QATRUNADA · JEPARA, ID</span>
-          </div>
-        </footer>
-      </div>
-    )
-  }
-
-  // When a project is active, render the dedicated ProjectDetailPage with the same Navbar & Footer
-  if (activeProject) {
-    return (
-      <div className="min-h-screen bg-white text-black flex flex-col selection:bg-black selection:text-white">
-        <Navbar />
-        <main id="main-content" className="flex-1">
-          <ProjectDetailPage
-            project={activeProject}
-            onBack={handleBackToPortfolio}
-          />
-        </main>
-        <Footer />
-      </div>
-    )
+    navigateToHash('#home')
   }
 
   return (
-    <div className="min-h-screen bg-white text-black flex flex-col selection:bg-black selection:text-white">
-      {/* Accessible skip link */}
-      <a
-        href="#main-content"
-        className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-black focus:text-white focus:text-xs focus:font-mono focus:uppercase focus:tracking-wider focus:outline-1 focus:outline-black"
-      >
-        Skip to main content
-      </a>
+    <>
+      {/* High-performance canvas pixel transition overlay */}
+      <PixelTransitionOverlay
+        isTransitioning={isTransitioning}
+        onCovered={handleTransitionCovered}
+        onComplete={handleTransitionComplete}
+      />
 
-      {/* 1. Header & Minimal Editorial Navigation */}
-      <Navbar />
+      {/* 1. Resume Page View */}
+      {currentRoute.type === 'resume' ? (
+        <div className="min-h-screen bg-white text-black flex flex-col selection:bg-black selection:text-white">
+          <Navbar />
+          <main id="main-content" className="flex-1">
+            <ResumePage onBack={handleBackFromResume} />
+          </main>
+          <footer className="no-print border-t border-black py-6 bg-white text-black mt-auto">
+            <div className="mx-auto w-full max-w-[1736px] px-6 sm:px-8 flex flex-col sm:flex-row items-center justify-between gap-3 font-mono text-[11px] sm:text-[12px] uppercase tracking-wider text-neutral-500">
+              <span>RAYY.DEV · CURRICULUM VITAE SPECIFICATION</span>
+              <span>© {new Date().getFullYear()} RAYYAN QATRUNADA · JEPARA, ID</span>
+            </div>
+          </footer>
+        </div>
+      ) : currentRoute.type === 'project' && currentRoute.project ? (
+        /* 2. Project Detail View */
+        <div className="min-h-screen bg-white text-black flex flex-col selection:bg-black selection:text-white">
+          <Navbar />
+          <main id="main-content" className="flex-1">
+            <ProjectDetailPage
+              project={currentRoute.project}
+              onBack={handleBackToPortfolio}
+            />
+          </main>
+          <Footer />
+        </div>
+      ) : (
+        /* 3. Main Portfolio Home View */
+        <div className="min-h-screen bg-white text-black flex flex-col selection:bg-black selection:text-white">
+          {/* Accessible skip link */}
+          <a
+            href="#main-content"
+            className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-black focus:text-white focus:text-xs focus:font-mono focus:uppercase focus:tracking-wider focus:outline-1 focus:outline-black"
+          >
+            Skip to main content
+          </a>
 
-      {/* Main Page Flow with main-content landmark */}
-      <main id="main-content" className="flex-1">
-        {/* 2. Editorial Hero Section (Top header + 4-line headline + Excerpt & Portrait) */}
-        <Hero />
+          {/* Header & Minimal Editorial Navigation */}
+          <Navbar />
 
-        {/* 3. Case Studies Editorial Project List (Randomized hover reveal) */}
-        <Projects onOpenProject={handleOpenProject} />
+          {/* Main Page Flow */}
+          <main id="main-content" className="flex-1">
+            {/* Editorial Hero Section */}
+            <Hero />
 
-        {/* 4. Large Typographic Statement (Manifesto + wireframe globe) */}
-        <EngineeringStatement />
+            {/* Case Studies Editorial Project List */}
+            <Projects onOpenProject={handleOpenProject} />
 
-        {/* 4B. Philosophy Editorial Narrative (Two-column staggered layout) */}
-        <PhilosophyNarrative />
+            {/* Large Typographic Statement */}
+            <EngineeringStatement />
 
-        {/* 5. Skills & Technologies Section (matching example layout) */}
-        <Skills />
-      </main>
+            {/* Philosophy Editorial Narrative */}
+            <PhilosophyNarrative />
 
-      {/* 6. Footer & Infinite Running Marquee */}
-      <Footer />
-    </div>
+            {/* Skills & Technologies Section */}
+            <Skills />
+          </main>
+
+          {/* Footer & Infinite Running Marquee */}
+          <Footer />
+        </div>
+      )}
+    </>
   )
 }
 
