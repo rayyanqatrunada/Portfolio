@@ -9,6 +9,7 @@ import Footer from './sections/Footer'
 import ProjectDetailPage from './components/ProjectDetailPage'
 import ResumePage from './components/ResumePage'
 import PixelTransitionOverlay from './components/PixelTransitionOverlay'
+import ContactEmailModal from './components/ContactEmailModal'
 import { projectsData } from './data/projects'
 import { usePageTransitionScramble } from './hooks/usePageTransitionScramble'
 import { scrollToSection } from './utils/scrollHelper'
@@ -156,6 +157,9 @@ function App() {
         onCovered={handleTransitionCovered}
         onComplete={handleTransitionComplete}
       />
+
+      {/* Official In-Web Direct Email Modal */}
+      <ContactEmailModal />
 
       {/* 1. Resume Page View */}
       {currentRoute.type === 'resume' ? (
