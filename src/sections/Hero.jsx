@@ -360,7 +360,7 @@ export default function Hero() {
                 <a href="#projects" className="text-black font-semibold hover:opacity-60 transition-opacity">
                   PRODUCTIONS / PROJECTS
                 </a>
-                <span className="text-neutral-400">04 ARCHIVES</span>
+                <span className="text-neutral-400">05 ARCHIVES</span>
               </div>
               <div className="flex justify-between items-center text-neutral-600">
                 <span>TECHNICAL SPECIFICATION</span>

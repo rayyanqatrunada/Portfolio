@@ -267,7 +267,48 @@ export default function ResumePage({ onBack }) {
                 </ul>
               </div>
 
-              {/* Project 3: PMart */}
+              {/* Project 3: Lyric Widget */}
+              <div className="pt-5 sm:pt-7 pb-6 sm:pb-8 border-b border-black/15">
+                <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-1 sm:gap-2 pb-1.5">
+                  <div className="flex items-baseline gap-2">
+                    <h3 className="font-sans font-bold text-[16px] sm:text-xl uppercase tracking-tight text-black">
+                      LYRIC WIDGET
+                    </h3>
+                    <span className="font-mono text-[11px] sm:text-[12px] uppercase text-neutral-500">
+                      — DESKTOP AUDIO-SYNCED OVERLAY
+                    </span>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <span className="font-mono text-[11px] sm:text-[12px] uppercase text-neutral-600">
+                      2026
+                    </span>
+                    <a
+                      href="https://github.com/rayyanqatrunada/Lyric-widget"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1 font-mono text-[11px] sm:text-[12px] uppercase text-black hover:underline"
+                    >
+                      <span>GITHUB</span>
+                      <SignalArrow className="w-2.5 h-2.5" />
+                    </a>
+                  </div>
+                </div>
+
+                <div className="font-mono text-[10.5px] sm:text-[12px] uppercase tracking-wider text-neutral-500 pb-2 leading-relaxed">
+                  STACK: QML / QTQUICK (QT 6) · KDE KIRIGAMI · D-BUS MPRIS 2.0 · PYTHON 3 · PYSIDE6
+                </div>
+
+                <ul className="list-disc list-inside space-y-1.5 font-sans font-light text-[13px] sm:text-[15px] text-neutral-800 leading-relaxed">
+                  <li>
+                    Engineered hardware-accelerated desktop synced lyrics overlay for KDE Plasma 6 consuming sub-25MB RAM (~90% lower than Electron alternatives).
+                  </li>
+                  <li className="hidden sm:list-item">
+                    Built a 3-tier zero-downtime fallback pipeline (LRCLIB, NetEase, KuGou) and a 30s grace-period debounce cache preventing browser MPRIS flicker.
+                  </li>
+                </ul>
+              </div>
+
+              {/* Project 4: PMart */}
               <div className="pt-5 sm:pt-7 pb-6 sm:pb-8 border-b border-black/15">
                 <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-1 sm:gap-2 pb-1.5">
                   <div className="flex items-baseline gap-2">

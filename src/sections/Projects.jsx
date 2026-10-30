@@ -319,19 +319,25 @@ function ProjectRow({
     onSelect(project)
   }
 
-  const titleFontClasses = [
-    'font-serif font-light italic tracking-tight text-4xl sm:text-6xl md:text-7xl lg:text-[88px] xl:text-[96px]',
-    'font-mono font-light uppercase tracking-wide text-3xl sm:text-4xl md:text-5xl lg:text-[62px] xl:text-[70px]',
-    'font-serif uppercase tracking-normal font-normal text-4xl sm:text-6xl md:text-7xl lg:text-[88px] xl:text-[96px]',
-    'font-sans font-black uppercase tracking-tight text-3xl sm:text-5xl md:text-6xl lg:text-[66px] xl:text-[74px]',
-  ][index % 4]
+  const titleFontClasses =
+    project.titleFontClass ||
+    [
+      'font-serif font-light italic tracking-tight text-4xl sm:text-6xl md:text-7xl lg:text-[88px] xl:text-[96px]',
+      'font-mono font-light uppercase tracking-wide text-3xl sm:text-4xl md:text-5xl lg:text-[62px] xl:text-[70px]',
+      'font-metal font-normal tracking-tight text-4xl sm:text-6xl md:text-7xl lg:text-[84px] xl:text-[92px]',
+      'font-serif uppercase tracking-normal font-normal text-4xl sm:text-6xl md:text-7xl lg:text-[88px] xl:text-[96px]',
+      'font-sans font-black uppercase tracking-tight text-3xl sm:text-5xl md:text-6xl lg:text-[66px] xl:text-[74px]',
+    ][index % 5]
 
-  const mobileTitleFontClasses = [
-    'font-serif font-light italic tracking-tight text-2xl sm:text-3xl md:text-4xl',
-    'font-mono font-light uppercase tracking-wide text-xl sm:text-2xl md:text-3xl',
-    'font-serif uppercase tracking-normal font-normal text-2xl sm:text-3xl md:text-4xl',
-    'font-sans font-black uppercase tracking-tight text-xl sm:text-2xl md:text-3xl',
-  ][index % 4]
+  const mobileTitleFontClasses =
+    project.mobileTitleFontClass ||
+    [
+      'font-serif font-light italic tracking-tight text-2xl sm:text-3xl md:text-4xl',
+      'font-mono font-light uppercase tracking-wide text-xl sm:text-2xl md:text-3xl',
+      'font-metal text-2xl sm:text-3xl md:text-4xl',
+      'font-serif uppercase tracking-normal font-normal text-2xl sm:text-3xl md:text-4xl',
+      'font-sans font-black uppercase tracking-tight text-xl sm:text-2xl md:text-3xl',
+    ][index % 5]
 
   return (
     <article
@@ -377,9 +383,13 @@ function ProjectRow({
             </span>
           </div>
 
-          {/* Bottom: Clean Uppercase Title */}
+          {/* Bottom: Clean Uppercase / Stylized Title */}
           <div className="w-full pb-0.5">
-            <h3 className="font-sans font-medium uppercase text-[13px] sm:text-[14px] leading-tight text-black tracking-tight truncate">
+            <h3
+              className={`${
+                project.mobileTitleFontClass || 'font-sans font-medium uppercase text-[13px] sm:text-[14px]'
+              } leading-tight text-black tracking-tight truncate`}
+            >
               {mobileDisplayText}
             </h3>
           </div>
@@ -630,7 +640,7 @@ export default function Projects({ onOpenProject }) {
           </div>
 
           <div className="font-mono text-[11px] sm:text-[12px] text-neutral-500 uppercase tracking-widest hidden sm:block">
-            04 ARCHITECTURAL PRODUCTIONS
+            {String(projectsData.length).padStart(2, '0')} ARCHITECTURAL PRODUCTIONS
           </div>
         </div>
 

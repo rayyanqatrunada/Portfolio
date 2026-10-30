@@ -4,6 +4,7 @@
   --font-serif: 'Instrument Serif', Georgia, 'Times New Roman', serif;
   --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   --font-mono: 'JetBrains Mono', 'GT America Mono', 'Courier New', monospace;
+  --font-metal: 'Metal', 'Instrument Serif', Georgia, serif;
 
   /* Editorial Monochrome Foundation (Signal-A Inspired) */
   --color-canvas: #ffffff;
@@ -81,6 +82,10 @@ body {
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
   position: relative;
+}
+
+.font-metal {
+  font-family: var(--font-metal), 'Metal', 'Instrument Serif', Georgia, serif;
 }
 
 /* Sharp high-contrast focus indicators */

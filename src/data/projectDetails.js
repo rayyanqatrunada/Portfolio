@@ -203,6 +203,101 @@ export const projectDetailsData = {
     },
   },
 
+  'lyric-widget': {
+    id: 'lyric-widget',
+    title: 'Lyric Widget — Desktop Audio-Synced Lyrics Overlay',
+    category: 'Linux Desktop Application / Multimedia UI',
+    role: 'Systems & Core Developer',
+    status: 'Active Open Source',
+    repoUrl: 'https://github.com/rayyanqatrunada/Lyric-widget',
+    liveUrl: null,
+    overview:
+      'Aplikasi desktop overlay lirik audio tersinkronisasi dan native plasmoid untuk KDE Plasma 6 (Wayland & X11) serta cross-desktop via Python/PySide6. Dirancang dengan efisiensi memori ekstrem (<25MB RAM), integrasi Linux D-Bus MPRIS 2.0, serta arsitektur fallback 3-tier zero-downtime multi-source lyrics pipeline.',
+    problemStatement:
+      'Aplikasi penampil lirik desktop pada ekosistem Linux umumnya berbasis Electron yang boros memori (300MB–600MB RAM), terputus pasca migrasi KDE Plasma 6 ke Qt 6, dan rentan mengalami visual flickering atau crash ketika sinyal MPRIS browser (seperti YouTube Music) terputus jeda antar lagu atau saat API lirik publik mengalami HTTP 503.',
+    contribution:
+      'Merancang arsitektur cache anti-flicker dengan 30s grace period, membangun multi-source engine 3 tingkat (LRCLIB, NetEase, KuGou), mengimplementasikan transliterasi Kana-ke-Romaji realtime di QML, serta mengoptimalkan footprint memori hingga <25MB RAM.',
+    verifiedStack: [
+      { name: 'QML / QtQuick (Qt 6)', category: 'Hardware UI Engine' },
+      { name: 'KDE Kirigami', category: 'System HIG Framework' },
+      { name: 'D-Bus MPRIS 2.0', category: 'IPC Media Standard' },
+      { name: 'Python 3 & PySide6', category: 'Cross-Desktop Runtime' },
+      { name: 'RESTful Networking', category: 'Asynchronous API' },
+      { name: 'Base64 & UTF-8 Decoder', category: 'Binary LRC Sync' },
+    ],
+    architecture: {
+      pattern: 'Decoupled IPC Event-Driven & Multi-Tier Fallback Pipeline',
+      description:
+        'Aplikasi menghubungkan antarmuka grafis QML berbasis akselerasi perangkat keras langsung ke Linux D-Bus (org.mpris.MediaPlayer2). State pemutaran dipantau secara reaktif, sementara pengambilan lirik didelegasikan ke pipeline multi-tier yang mengeksekusi fallback bertingkat secara otomatis.',
+      highlights: [
+        'Koneksi universal ke Spotify, Strawberry, VLC, Chromium, Brave, Firefox, dan YouTube Music via standar MPRIS 2.0.',
+        'Mekanisme anti-flicker 30-detik debounce grace period untuk mencegah overlay tertutup di sela transisi lagu browser.',
+        'Pipeline sanitasi regex otomatis yang membersihkan metadata video YouTube ([MV], (Official Audio), dsb).',
+        'Engine transliterasi real-time Kana ke Romaji (Hepburn) dan pemisahan vokal backing secara modular.',
+      ],
+    },
+    database: {
+      description:
+        'Struktur data model D-Bus MPRIS dan model cache lirik berbasis state in-memory serta persistent LRC storage.',
+      entities: [
+        {
+          name: 'mpris_media_state',
+          description: 'Model data IPC D-Bus yang menangkap metadata pemutar audio aktif secara real-time.',
+          fields: ['TrackID (String)', 'Title (String)', 'Artist (String)', 'Position (Microseconds)', 'PlaybackStatus (Enum)', 'Length (Microseconds)'],
+          relations: 'D-Bus broadcast event dari media player ke Plasma Shell',
+        },
+        {
+          name: 'lyric_cache_store',
+          description: 'Penyimpanan lokal lirik tersinkronisasi (LRC) dengan identitas track terverifikasi.',
+          fields: ['cache_key (Hash)', 'artist (String)', 'title (String)', 'provider (Enum: LRCLIB | NetEase | KuGou)', 'synced_lrc (Text)', 'duration_ms (Int)'],
+          relations: '1 : N mapping terhadap timeline playback audio',
+        },
+        {
+          name: 'vocal_separation_model',
+          description: 'Struktur parsing lirik untuk memisahkan lead vocal dan backing vocal via regex tokenization.',
+          fields: ['line_index (Int)', 'timestamp_ms (Int)', 'lead_lyric (String)', 'backing_lyric (String, Nullable)', 'romaji_text (String)'],
+          relations: 'Direct feed ke QML hardware-accelerated text renderer',
+        },
+      ],
+    },
+    challenges: [
+      {
+        challenge: 'Browser MPRIS Drop & Visual Flickering Antar Lagu',
+        solution:
+          'Menerapkan state cache cerdas dengan 30-second debounce grace period yang mempertahankan judul dan lirik terakhir saat browser mengirim sinyal Stopped sementara antar lagu.',
+        impact: 'Menghilangkan flickering sepenuhnya dan menjamin pengalaman visual yang mulus dan stabil.',
+      },
+      {
+        challenge: 'Kegagalan API Tunggal & Server Timeout (HTTP 503)',
+        solution:
+          'Membangun engine fallback 3 tingkat yang secara otomatis mengalihkan query dari LRCLIB ke NetEase Cloud Music (>40M lagu), dan terakhir ke KuGou Music dengan decoding Base64 binary.',
+        impact: 'Meningkatkan lyric match rate hingga ~98.5% tanpa kegagalan layanan yang terlihat oleh pengguna.',
+      },
+      {
+        challenge: 'Efisiensi Resource Memory pada Lingkungan Desktop Linux',
+        solution:
+          'Menggunakan QML/QtQuick murni dan integrasi native KDE Plasma Shell daripada runtime berbasis web atau Electron.',
+        impact: 'Penggunaan RAM terpangkas lebih dari 90%, hanya mengonsumsi ~18–24 MB RAM dengan penggunaan CPU <0.8%.',
+      },
+    ],
+    keyFeatures: [
+      'Sub-25MB RAM native plasmoid untuk KDE Plasma 6 (Wayland & X11).',
+      'Standalone overlay mode via Python & PySide6 untuk GNOME, Hyprland, Sway, dan XFCE.',
+      'Koneksi universal ke semua pemutar audio melalui D-Bus MPRIS 2.0.',
+      'Anti-flicker 30-detik grace period khusus pemutar musik berbasis web browser.',
+      '3-Tier multi-source lyrics engine (LRCLIB, NetEase, KuGou).',
+      'Pemisahan vokal otomatis dan transliterasi Japanese Kana ke Romaji real-time.',
+      'Procedural gradient bleed dan tipografi adaptif 60/144 FPS hardware-accelerated.',
+    ],
+    verification: {
+      isVerified: true,
+      source: 'Repository GitHub rayyanqatrunada/Lyric-widget',
+      repoUrl: 'https://github.com/rayyanqatrunada/Lyric-widget',
+      notes:
+        'Aplikasi open-source terverifikasi dengan arsitektur native KDE Plasma 6 dan Python PySide6 standalone.',
+    },
+  },
+
   pmart: {
     id: 'pmart',
     title: 'PMart — Student Commerce Marketplace',

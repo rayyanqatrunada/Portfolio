@@ -3,12 +3,14 @@ import Container from './Container'
 import SignalArrow from './SignalArrow'
 import compify11Img from '../assets/Project Image/1_1 compify.jpg'
 import tsm11Img from '../assets/Project Image/1_1 tsm.jpg'
+import lyricWidget11Img from '../assets/Project Image/1_1 lyric widget.jpg'
 import pmart11Img from '../assets/Project Image/1_1 pmart.jpg'
 import study11Img from '../assets/Project Image/1_1 study.jpg'
 
 const PROJECT_1_1_IMAGES = {
   compify: compify11Img,
   'tsm-portal': tsm11Img,
+  'lyric-widget': lyricWidget11Img,
   pmart: pmart11Img,
   study: study11Img,
 }
@@ -85,6 +87,63 @@ function getProjectCaseStudyData(project) {
     return {
       ...COMPIFY_DATA,
       image: project.squareImage || PROJECT_1_1_IMAGES['compify'],
+      repoUrl: project.repoUrl,
+    }
+  }
+
+  if (project.id === 'lyric-widget') {
+    return {
+      title: 'LYRIC WIDGET',
+      scopeLabels: [
+        'KDE PLASMA 6',
+        'QML & QT 6',
+        'LINUX MPRIS 2.0',
+      ],
+      compifyScopeLabels: [
+        'DESKTOP AUDIO SYNC',
+        'MULTI-SOURCE ENGINE',
+        'PYTHON & PYSIDE6',
+      ],
+      about:
+        'Lyric Widget is a native, hardware-accelerated desktop synchronized lyrics overlay and native KDE Plasma 6 plasmoid. Designed with extreme memory efficiency (<25MB RAM), it bridges directly to Linux media players via MPRIS 2.0 and features a zero-downtime 3-tier fallback architecture.',
+      objective:
+        'Linux desktop users lacked a lightweight, modern lyrics overlay that works seamlessly with KDE Plasma 6 on Wayland and handles unstable browser MPRIS streams without visual flickering or server downtime errors.',
+      coreFunction:
+        'Synchronizes in realtime (35ms latency) with any active player, featuring a 30s grace-period anti-flicker cache, 3-tier lyric fallback (LRCLIB, NetEase Cloud, KuGou), vocal separation, and Kana-to-Romaji transliteration.',
+      technology: [
+        'QML & QTQUICK (QT 6)',
+        'KDE KIRIGAMI',
+        'D-BUS MPRIS 2.0',
+        'PYTHON 3 & PYSIDE6',
+        'RESTFUL NETWORKING',
+        'BASE64 & UTF-8 DECODER',
+        'REGEX MEDIA SANITIZER',
+        'ROMAJI TRANSLITERATION',
+        'WAYLAND & X11 COMPATIBLE',
+      ],
+      artDirection: [
+        'PROCEDURAL GRADIENT BLEED',
+        'SUBTLE MONOCHROME OVERLAY',
+        'RESPONSIVE TYPOGRAPHY',
+        'MICRO-ANIMATION SYNC',
+        'VOCAL SEPARATION STYLING',
+        'ZERO-FLICKER TRANSITIONS',
+        'EDGE-TO-EDGE BLEND',
+        'MINIMAL HARDWARE FOOTPRINT',
+        'KDE HIG COMPLIANT',
+      ],
+      productResearch: [
+        'SUB-25MB RAM OPTIMIZATION',
+        '30S ANTI-FLICKER DEBOUNCE',
+        'MULTI-SOURCE FALLBACK PIPELINE',
+        'NETEASE & KUGOU INTEGRATION',
+        'MEDIA SANITIZATION REGEX',
+        'BROWSER MPRIS STATE RECOVERY',
+        'REALTIME ROMAJI PARSER',
+        '35MS AUDIO ALIGNMENT',
+        'STANDALONE OVERLAY COMPATIBILITY',
+      ],
+      image: project.squareImage || PROJECT_1_1_IMAGES['lyric-widget'],
       repoUrl: project.repoUrl,
     }
   }
